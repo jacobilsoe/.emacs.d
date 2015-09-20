@@ -5,7 +5,7 @@
                          ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
-(defvar packages '(dos powershell))
+(defvar packages '(dos powershell magit))
 
 (defun require-package (package)
   (unless (package-installed-p package)
