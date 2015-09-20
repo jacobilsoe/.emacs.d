@@ -5,7 +5,7 @@
                          ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
-(defvar packages '(dos))
+(defvar packages '(dos powershell))
 
 (defun require-package (package)
   (unless (package-installed-p package)
@@ -18,6 +18,7 @@
 (install-packages)
 
 (add-to-list 'auto-mode-alist '("\\.\\(bat\\|cmd\\)\\'" . dos-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(ps1\\|psm1\\)\\'" . powershell-mode))
 
 (setq inhibit-splash-screen t)
 
