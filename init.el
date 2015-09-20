@@ -1,4 +1,5 @@
 (server-start)
+(toggle-frame-fullscreen)
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
