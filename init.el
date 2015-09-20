@@ -1,5 +1,4 @@
 (server-start)
-(toggle-frame-fullscreen)
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -21,15 +20,20 @@
 (add-to-list 'auto-mode-alist '("\\.\\(bat\\|cmd\\)\\'" . dos-mode))
 (add-to-list 'auto-mode-alist '("\\.\\(ps1\\|psm1\\)\\'" . powershell-mode))
 
+(toggle-frame-fullscreen)
 (setq inhibit-splash-screen t)
-
-(setq make-backup-files nil)
-
-(setq large-file-warning-threshold nil)
-
 (setq w32-grab-focus-on-raise nil)
 
+(setq make-backup-files nil)
+(setq large-file-warning-threshold nil)
+
+(tool-bar-mode -1)
+(show-paren-mode t)
+(blink-cursor-mode 0)
+
 (ido-mode t)
+
+(setq org-confirm-shell-link-function nil)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -38,11 +42,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
- '(blink-cursor-mode nil)
- '(custom-enabled-themes (quote (wombat)))
- '(org-confirm-shell-link-function nil)
- '(show-paren-mode t)
- '(tool-bar-mode nil))
+ '(custom-enabled-themes (quote (wombat))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
