@@ -37,5 +37,6 @@
 
 (load-theme 'wombat t)
 
-(setq display-time-string-forms '(day "/" month "/" year " " 24-hours ":" minutes))
+(setq display-time-string-forms '((propertize (concat day "/" month "/" year " " 24-hours ":" minutes) 'face 'font-lock-string-face)))
 (display-time-mode)
+
