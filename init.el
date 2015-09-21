@@ -36,3 +36,6 @@
 (setq org-confirm-shell-link-function nil)
 
 (load-theme 'wombat t)
+
+(setq display-time-string-forms '(day "/" month "/" year " " 24-hours ":" minutes))
+(display-time-mode)
