@@ -41,3 +41,5 @@
 (display-time-mode)
 
 (prefer-coding-system 'utf-8)
+
+(global-set-key (kbd "C-x g") 'magit-status)
