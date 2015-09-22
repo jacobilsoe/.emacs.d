@@ -1,24 +1,6 @@
 (server-start)
 
-(require 'package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
-(package-initialize)
-
-(defvar packages '(dos powershell magit))
-
-(defun require-package (package)
-  (unless (package-installed-p package)
-    (package-install package)))
-
-(defun install-packages ()
-    (package-refresh-contents)
-    (mapc #'require-package packages))
-
-(install-packages)
-
-(add-to-list 'auto-mode-alist '("\\.\\(bat\\|cmd\\)\\'" . dos-mode))
-(add-to-list 'auto-mode-alist '("\\.\\(ps1\\|psm1\\)\\'" . powershell-mode))
+(add-to-list 'load-path "~/.emacs.d/jacobilsoe/")
 
 (toggle-frame-fullscreen)
 (setq inhibit-splash-screen t)
@@ -42,4 +24,7 @@
 
 (prefer-coding-system 'utf-8)
 
-(global-set-key (kbd "C-x g") 'magit-status)
+(require 'jacobilsoe-packages)
+(require 'jacobilsoe-magit)
+(require 'jacobilsoe-dos)
+(require 'jacobilsoe-powershell)
