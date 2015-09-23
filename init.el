@@ -28,3 +28,4 @@
 (require 'jacobilsoe-magit)
 (require 'jacobilsoe-dos)
 (require 'jacobilsoe-powershell)
+(require 'jacobilsoe-nxml)
