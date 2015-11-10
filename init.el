@@ -29,3 +29,4 @@
 (require 'jacobilsoe-dos)
 (require 'jacobilsoe-powershell)
 (require 'jacobilsoe-nxml)
+(require 'jacobilsoe-scala-mode2)
