@@ -31,3 +31,4 @@
 (require 'jacobilsoe-nxml)
 (require 'jacobilsoe-scala-mode2)
 (require 'jacobilsoe-groovy-mode)
+(require 'jacobilsoe-json)
