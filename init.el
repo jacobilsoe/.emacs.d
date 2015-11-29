@@ -24,6 +24,8 @@
 
 (prefer-coding-system 'utf-8)
 
+(global-set-key (kbd "M-SPC") 'cycle-spacing)
+
 (require 'jacobilsoe-packages)
 (require 'jacobilsoe-magit)
 (require 'jacobilsoe-dos)
