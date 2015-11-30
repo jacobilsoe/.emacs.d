@@ -33,4 +33,5 @@
 (require 'jacobilsoe-nxml)
 (require 'jacobilsoe-scala-mode2)
 (require 'jacobilsoe-groovy-mode)
+(require 'jacobilsoe-whole-line-or-region)
 (require 'jacobilsoe-json)
