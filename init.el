@@ -1,5 +1,7 @@
 (server-start)
 
+(set-face-attribute 'default nil :height 120 :family "Inconsolata")
+
 (add-to-list 'load-path "~/.emacs.d/jacobilsoe/")
 
 (toggle-frame-fullscreen)
