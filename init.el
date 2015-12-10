@@ -11,12 +11,12 @@
 (setq make-backup-files nil)
 (setq large-file-warning-threshold nil)
 
-(tool-bar-mode nil)
+(tool-bar-mode 0)
 (setq show-paren-delay 0)
-(show-paren-mode t)
-(blink-cursor-mode nil)
+(show-paren-mode)
+(blink-cursor-mode 0)
 
-(ido-mode t)
+(ido-mode)
 
 (setq org-confirm-shell-link-function nil)
 
@@ -24,7 +24,7 @@
 
 (setq display-time-string-forms '((propertize (concat day "/" month "/" year " " 24-hours ":" minutes) 'face 'font-lock-string-face)))
 (display-time-mode)
-(setq column-number-mode t)
+(column-number-mode)
 
 (prefer-coding-system 'utf-8)
 
