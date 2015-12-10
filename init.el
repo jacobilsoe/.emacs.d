@@ -11,9 +11,10 @@
 (setq make-backup-files nil)
 (setq large-file-warning-threshold nil)
 
-(tool-bar-mode -1)
+(tool-bar-mode nil)
+(setq show-paren-delay 0)
 (show-paren-mode t)
-(blink-cursor-mode 0)
+(blink-cursor-mode nil)
 
 (ido-mode t)
 
