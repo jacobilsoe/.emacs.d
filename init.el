@@ -15,6 +15,7 @@
 (setq show-paren-delay 0)
 (show-paren-mode)
 (blink-cursor-mode 0)
+(delete-selection-mode)
 
 (ido-mode)
 
