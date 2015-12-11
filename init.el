@@ -16,6 +16,7 @@
 (show-paren-mode)
 (blink-cursor-mode 0)
 (delete-selection-mode)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (ido-mode)
 
