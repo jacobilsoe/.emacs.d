@@ -32,6 +32,13 @@
 
 (global-set-key (kbd "M-SPC") 'cycle-spacing)
 
+(defun jic-proced-settings ()
+  (proced-toggle-auto-update t)
+  (setq proced-auto-update-interval 1)
+  (setq proced-format 'medium)
+  )
+(add-hook 'proced-mode-hook 'jic-proced-settings)
+
 (require 'jacobilsoe-packages)
 (require 'jacobilsoe-magit)
 (require 'jacobilsoe-dos)
