@@ -30,6 +30,8 @@
 
 (prefer-coding-system 'utf-8)
 
+(fset 'yes-or-no-p 'y-or-n-p)
+
 (global-set-key (kbd "M-SPC") 'cycle-spacing)
 
 (defun jic-proced-settings ()
