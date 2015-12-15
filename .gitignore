@@ -1,8 +1,6 @@
-auto-save-list
-elpa
-ido.last
-server
-url
-
-
-
+/auto-save-list
+/elpa
+/ido.last
+/server
+/url
+/.last-package-update-day
