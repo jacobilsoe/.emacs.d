@@ -52,3 +52,4 @@
 (require 'jacobilsoe-groovy-mode)
 (require 'jacobilsoe-whole-line-or-region)
 (require 'jacobilsoe-json)
+(require 'jacobilsoe-dired)
