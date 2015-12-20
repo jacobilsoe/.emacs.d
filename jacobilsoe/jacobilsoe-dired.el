@@ -1,4 +1,5 @@
 (require-package 'dired+)
+(require-package 'dired-narrow)
 
 (setq diredp-hide-details-initially-flag nil)
 
@@ -11,6 +12,7 @@
 
 (define-key dired-mode-map (kbd "M-RET") 'open-in-external-app)
 (define-key dired-mode-map (kbd "C-<up>") 'diredp-up-directory)
+(define-key dired-mode-map (kbd "C-n") 'dired-narrow)
 
 (diredp-toggle-find-file-reuse-dir 1)
 
