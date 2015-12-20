@@ -9,8 +9,8 @@
   (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" (dired-get-filename) t t))
   )
 
-(define-key dired-mode-map "\M-\r" 'open-in-external-app)
-(define-key dired-mode-map [C-up] 'diredp-up-directory)
+(define-key dired-mode-map (kbd "M-RET") 'open-in-external-app)
+(define-key dired-mode-map (kbd "C-<up>") 'diredp-up-directory)
 
 (diredp-toggle-find-file-reuse-dir 1)
 
