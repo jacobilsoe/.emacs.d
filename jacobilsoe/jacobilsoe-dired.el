@@ -40,10 +40,9 @@
 (defun ls-lisp-format-file-size (file-size human-readable)
   (format "%15s" (group-number file-size 3 ".")))
 
-(defadvice ls-lisp-format (around my-ls-lisp-format (file-name file-attr file-size switches time-index))
-  (progn
-    ad-do-it
-    (setq ad-return-value (substring ad-return-value 10))))
-(ad-activate 'ls-lisp-format t)
+(defun my-ls-lisp-format (res)
+  (let ((dirstring (if (string= "d" (substring res 0 1)) "d" " ")))
+    (concat dirstring (substring res 10))))
+(advice-add 'ls-lisp-format :filter-return #'my-ls-lisp-format)
 
 (provide 'jacobilsoe-dired)
