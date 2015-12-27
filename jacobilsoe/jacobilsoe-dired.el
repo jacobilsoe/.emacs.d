@@ -18,6 +18,7 @@
 
 (setq ls-lisp-dirs-first t)
 (setq ls-lisp-verbosity nil)
+(setq ls-lisp-ignore-case t)
 
 (defun group-number (num &optional size char)
   "Format NUM as string grouped to SIZE with CHAR."
