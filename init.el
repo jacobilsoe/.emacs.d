@@ -18,10 +18,6 @@
 (delete-selection-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(add-hook 'dired-mode-hook 'hl-line-mode)
-
-(ido-mode)
-
 (setq org-confirm-shell-link-function nil)
 
 (load-theme 'wombat t)
@@ -53,3 +49,4 @@
 (require 'jacobilsoe-whole-line-or-region)
 (require 'jacobilsoe-json)
 (require 'jacobilsoe-dired)
+(require 'jacobilsoe-swiper)

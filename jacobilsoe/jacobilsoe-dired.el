@@ -14,6 +14,8 @@
 (define-key dired-mode-map (kbd "C-<up>") 'diredp-up-directory)
 (define-key dired-mode-map (kbd "C-n") 'dired-narrow)
 
+(add-hook 'dired-mode-hook 'hl-line-mode)
+
 (diredp-toggle-find-file-reuse-dir 1)
 
 (setq ls-lisp-dirs-first t)
