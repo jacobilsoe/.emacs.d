@@ -48,4 +48,14 @@
     (concat dirstring (substring res 10))))
 (advice-add 'ls-lisp-format :filter-return #'my-ls-lisp-format)
 
+(defun my-insert-directory(FILE SWITCHES &optional WILDCARD FULL-DIRECTORY-P)
+  (save-excursion
+    (save-match-data
+      (goto-char (point-min))
+      (when (re-search-forward "^ *total used in directory \\([0-9]+\\) available \\([0-9]+\\)")
+	(replace-match (format "%s k" (group-number (match-string 1) 3 ".")) nil nil nil 1)
+	(replace-match (format "%s k" (group-number (match-string 2) 3 ".")) nil nil nil 2)
+	))))
+(advice-add 'insert-directory :after #'my-insert-directory)
+
 (provide 'jacobilsoe-dired)
