@@ -58,4 +58,20 @@
 	))))
 (advice-add 'insert-directory :after #'my-insert-directory)
 
+(defun my-dired-jump-to-first-entry ()
+  (interactive)
+  (beginning-of-buffer)
+  (dired-goto-next-nontrivial-file))
+
+(define-key dired-mode-map
+  (vector 'remap 'beginning-of-buffer) 'my-dired-jump-to-first-entry)
+
+(defun my-dired-jump-to-last-entry ()
+  (interactive)
+  (end-of-buffer)
+  (dired-next-line -1))
+
+(define-key dired-mode-map
+  (vector 'remap 'end-of-buffer) 'my-dired-jump-to-last-entry)
+
 (provide 'jacobilsoe-dired)
