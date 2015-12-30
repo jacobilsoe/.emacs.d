@@ -39,6 +39,8 @@
   )
 (add-hook 'proced-mode-hook 'jic-proced-settings)
 
+(setq org-agenda-files '("~/Dropbox/Documents"))
+
 (require 'jacobilsoe-packages)
 (require 'jacobilsoe-magit)
 (require 'jacobilsoe-dos)
