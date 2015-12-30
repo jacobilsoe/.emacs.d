@@ -39,6 +39,7 @@
   )
 (add-hook 'proced-mode-hook 'jic-proced-settings)
 
+(global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-files '("~/Dropbox/Documents"))
 
 (require 'jacobilsoe-packages)
