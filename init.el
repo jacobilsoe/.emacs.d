@@ -41,6 +41,7 @@
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-files '("~/Dropbox/Documents"))
+(setq org-tags-column 0)
 
 (require 'jacobilsoe-packages)
 (require 'jacobilsoe-magit)
