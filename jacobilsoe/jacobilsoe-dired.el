@@ -74,4 +74,7 @@
 (define-key dired-mode-map
   (vector 'remap 'end-of-buffer) 'my-dired-jump-to-last-entry)
 
+(setq ls-lisp-format-time-list  '("%Y-%m-%d %H:%M" "%Y-%m-%d %H:%M"))
+(setq ls-lisp-use-localized-time-format t)
+
 (provide 'jacobilsoe-dired)
