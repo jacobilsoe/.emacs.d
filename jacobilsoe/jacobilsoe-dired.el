@@ -77,4 +77,8 @@
 (setq ls-lisp-format-time-list  '("%Y-%m-%d %H:%M" "%Y-%m-%d %H:%M"))
 (setq ls-lisp-use-localized-time-format t)
 
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+(setq auto-revert-verbose nil)
+(setq auto-revert-interval 1)
+
 (provide 'jacobilsoe-dired)
