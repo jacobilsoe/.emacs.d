@@ -22,7 +22,7 @@
 
 (load-theme 'wombat t)
 
-(setq display-time-string-forms '((propertize (concat day "/" month "/" year " " 24-hours ":" minutes) 'face 'font-lock-string-face)))
+(setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M" now) 'face 'font-lock-string-face)))
 (display-time-mode)
 (column-number-mode)
 
