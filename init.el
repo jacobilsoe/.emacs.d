@@ -17,6 +17,7 @@
 (blink-cursor-mode 0)
 (delete-selection-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 (setq org-confirm-shell-link-function nil)
 
