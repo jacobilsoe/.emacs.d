@@ -46,9 +46,18 @@
 
 (add-to-list 'auto-mode-alist '("\\.\\(xslt\\|targets\\)\\'" . nxml-mode))
 
-(require 'jacobilsoe-packages)
+(require 'package)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")))
+(package-initialize)
+(package-refresh-contents)
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(setq use-package-always-ensure t)
+
 (require 'jacobilsoe-dired)
-(require 'jacobilsoe-swiper)
 
 (use-package magit
   :bind
@@ -81,3 +90,24 @@
   (require 'whole-line-or-region)
   (add-to-list 'whole-line-or-region-extensions-alist '(comment-dwim whole-line-or-region-comment-dwim nil))
   (whole-line-or-region-mode t))
+
+(defun jacobilsoe-swiper ()
+  (interactive)
+  (if (> (buffer-size) 1000000)
+      (isearch-forward)
+    (swiper)))
+
+(use-package swiper
+  :demand
+  :bind
+  (("C-s" . jacobilsoe-swiper))
+  :config
+  (ivy-mode))
+
+(use-package auto-package-update
+  :demand
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (auto-package-update-maybe)
+  (setq auto-package-update-interval 1)
+  (auto-package-update-at-time "05:00"))

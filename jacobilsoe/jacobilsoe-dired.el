@@ -1,5 +1,5 @@
-(require-package 'dired+)
-(require-package 'dired-narrow)
+(use-package dired+)
+(use-package dired-narrow)
 
 (setq diredp-hide-details-initially-flag nil)
 
