@@ -15,4 +15,7 @@
 (setq auto-package-update-interval 1)
 (auto-package-update-at-time "05:00")
 
+(require-package 'use-package)
+(setq use-package-always-ensure t)
+
 (provide 'jacobilsoe-packages)

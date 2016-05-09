@@ -44,14 +44,34 @@
 (setq org-agenda-files '("~/Dropbox/Documents"))
 (setq org-tags-column 0)
 
+(add-to-list 'auto-mode-alist '("\\.\\(xslt\\|targets\\)\\'" . nxml-mode))
+
 (require 'jacobilsoe-packages)
-(require 'jacobilsoe-magit)
-(require 'jacobilsoe-dos)
-(require 'jacobilsoe-powershell)
-(require 'jacobilsoe-nxml)
-(require 'jacobilsoe-scala-mode2)
-(require 'jacobilsoe-groovy-mode)
-(require 'jacobilsoe-whole-line-or-region)
-(require 'jacobilsoe-json)
 (require 'jacobilsoe-dired)
 (require 'jacobilsoe-swiper)
+
+(use-package magit
+  :bind
+  (("C-x g" . magit-status))
+  :config
+  (setq magit-push-always-verify nil)
+  (use-package fullframe)
+  (fullframe magit-status magit-mode-quit-window)  )
+
+(use-package dos
+  :mode ("\\.\\(bat\\|cmd\\)\\'" . dos-mode))
+
+(use-package powershell)
+
+(use-package scala-mode2)
+
+(use-package json-mode)
+
+(use-package groovy-mode
+  :init (require 'cl))
+
+(use-package whole-line-or-region
+  :init
+  (require 'whole-line-or-region)
+  (add-to-list 'whole-line-or-region-extensions-alist '(comment-dwim whole-line-or-region-comment-dwim nil))
+  (whole-line-or-region-mode t))
