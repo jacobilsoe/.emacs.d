@@ -56,12 +56,18 @@
   :config
   (setq magit-push-always-verify nil)
   (use-package fullframe)
-  (fullframe magit-status magit-mode-quit-window)  )
+  (fullframe magit-status magit-mode-quit-window))
 
 (use-package dos
   :mode ("\\.\\(bat\\|cmd\\)\\'" . dos-mode))
 
 (use-package powershell)
+
+(use-package avy
+  :bind
+  (("C-'" . avy-goto-char-timer))
+  :config
+  (setq avy-timeout-seconds 0.3))
 
 (use-package scala-mode2)
 
