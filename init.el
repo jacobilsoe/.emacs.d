@@ -4,8 +4,6 @@
 
 (set-face-attribute 'default nil :height 120 :family "Inconsolata")
 
-(add-to-list 'load-path "~/.emacs.d/jacobilsoe/")
-
 (toggle-frame-fullscreen)
 (setq inhibit-splash-screen t)
 (setq w32-grab-focus-on-raise nil)
@@ -20,8 +18,6 @@
 (delete-selection-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
-
-(setq org-confirm-shell-link-function nil)
 
 (load-theme 'wombat t)
 
@@ -42,16 +38,12 @@
   )
 (add-hook 'proced-mode-hook 'jic-proced-settings)
 
-(global-set-key (kbd "C-c a") 'org-agenda)
-(setq org-agenda-files '("~/Dropbox/Documents"))
-(setq org-tags-column 0)
-(setq org-src-window-setup 'current-window)
-
 (add-to-list 'auto-mode-alist '("\\.\\(xslt\\|targets\\)\\'" . nxml-mode))
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("melpa" . "http://melpa.org/packages/")))
+			 ("melpa" . "http://melpa.org/packages/")
+			 ("org" . "http://orgmode.org/elpa/")))
 (package-initialize)
 (package-refresh-contents)
 
@@ -112,6 +104,22 @@
   (auto-package-update-maybe)
   (setq auto-package-update-interval 1)
   (auto-package-update-at-time "05:00"))
+
+;;* Org
+
+(use-package org
+  :bind
+  (("C-c a" . org-agenda))
+  :config
+  (setq org-agenda-files '("~/Dropbox/Documents"))
+  (setq org-tags-column 0)
+  (setq org-src-window-setup 'current-window)
+  (setq org-confirm-shell-link-function nil))
+
+(use-package ox-reveal
+  :config
+  (setq org-reveal-root "file:///C:/reveal.js-3.3.0")
+  )
 
 ;;* Dired
 
