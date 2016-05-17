@@ -1,35 +1,44 @@
 ;; -*- orgstruct-heading-prefix-regexp: ";;"; eval: (orgstruct-mode 1) -*-
-;;* General
+;;* general
+
 (server-start)
 
+;;* visuals
+
 (set-face-attribute 'default nil :height 120 :family "Inconsolata")
+(load-theme 'wombat t)
+(tool-bar-mode 0)
+(setq inhibit-splash-screen t)
+
+;;* fullscreen
 
 (toggle-frame-fullscreen)
-(setq inhibit-splash-screen t)
 (setq w32-grab-focus-on-raise nil)
 
-(setq make-backup-files nil)
-(setq large-file-warning-threshold nil)
+;;* editing
 
-(tool-bar-mode 0)
 (setq show-paren-delay 0)
 (show-paren-mode)
 (blink-cursor-mode 0)
 (delete-selection-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
+(global-set-key (kbd "M-SPC") 'cycle-spacing)
+(fset 'yes-or-no-p 'y-or-n-p)
 
-(load-theme 'wombat t)
+;;* files
+
+(setq make-backup-files nil)
+(setq large-file-warning-threshold nil)
+(prefer-coding-system 'utf-8)
+
+;;* mode-line
 
 (setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M" now) 'face 'font-lock-string-face)))
 (display-time-mode)
 (column-number-mode)
 
-(prefer-coding-system 'utf-8)
-
-(fset 'yes-or-no-p 'y-or-n-p)
-
-(global-set-key (kbd "M-SPC") 'cycle-spacing)
+;;* proced
 
 (defun jic-proced-settings ()
   (proced-toggle-auto-update t)
@@ -38,7 +47,11 @@
   )
 (add-hook 'proced-mode-hook 'jic-proced-settings)
 
+;;* nxml-mode
+
 (add-to-list 'auto-mode-alist '("\\.\\(xslt\\|targets\\)\\'" . nxml-mode))
+
+;;* package
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -52,6 +65,8 @@
 
 (setq use-package-always-ensure t)
 
+;;* magit
+
 (use-package magit
   :bind
   (("C-x g" . magit-status))
@@ -60,10 +75,16 @@
   (use-package fullframe)
   (fullframe magit-status magit-mode-quit-window))
 
+;;* dos
+
 (use-package dos
   :mode ("\\.\\(bat\\|cmd\\)\\'" . dos-mode))
 
+;;* powershell
+
 (use-package powershell)
+
+;;* avy
 
 (use-package avy
   :bind
@@ -71,18 +92,28 @@
   :config
   (setq avy-timeout-seconds 0.3))
 
+;;* scala-mode2
+
 (use-package scala-mode2)
+
+;;* json-mode
 
 (use-package json-mode)
 
+;;* groovy-mode
+
 (use-package groovy-mode
   :init (require 'cl))
+
+;;* whole-line-or-region
 
 (use-package whole-line-or-region
   :init
   (require 'whole-line-or-region)
   (add-to-list 'whole-line-or-region-extensions-alist '(comment-dwim whole-line-or-region-comment-dwim nil))
   (whole-line-or-region-mode t))
+
+;;* swiper
 
 (defun jacobilsoe-swiper ()
   (interactive)
@@ -97,6 +128,8 @@
   :config
   (ivy-mode))
 
+;;* auto-package-update
+
 (use-package auto-package-update
   :demand
   :config
@@ -105,7 +138,7 @@
   (setq auto-package-update-interval 1)
   (auto-package-update-at-time "05:00"))
 
-;;* Org
+;;* org
 
 (use-package org
   :bind
@@ -121,7 +154,7 @@
   (setq org-reveal-root "file:///C:/reveal.js-3.3.0")
   )
 
-;;* Dired
+;;* dired
 
 (use-package dired+)
 (use-package dired-narrow)
