@@ -92,9 +92,11 @@
   :config
   (setq avy-timeout-seconds 0.3))
 
-;;* scala-mode2
+;;* scala-mode
 
-(use-package scala-mode2)
+(use-package scala-mode
+  :interpreter
+  ("scala" . scala-mode))
 
 ;;* json-mode
 
