@@ -92,6 +92,12 @@
   :config
   (setq avy-timeout-seconds 0.3))
 
+;;* ace-window
+
+(use-package ace-window
+  :bind
+  (("M-p" . ace-window)))
+
 ;;* scala-mode
 
 (use-package scala-mode
