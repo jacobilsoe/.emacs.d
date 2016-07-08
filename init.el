@@ -72,6 +72,8 @@
   :bind
   (("C-x g" . magit-status))
   :config
+  (add-hook 'git-commit-setup-hook 'turn-off-auto-fill t)
+  (setq git-commit-summary-max-length 999)
   (setq magit-push-always-verify nil)
   (use-package fullframe)
   (fullframe magit-status magit-mode-quit-window))
