@@ -78,11 +78,6 @@
   (use-package fullframe)
   (fullframe magit-status magit-mode-quit-window))
 
-;;* dos
-
-(use-package dos
-  :mode ("\\.\\(bat\\|cmd\\)\\'" . dos-mode))
-
 ;;* powershell
 
 (use-package powershell)
