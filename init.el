@@ -161,8 +161,10 @@
   )
 
 ;;* dired
+(use-package dired+
+  :load-path "packages/"
+  )
 
-(use-package dired+)
 (use-package dired-narrow)
 
 (setq diredp-hide-details-initially-flag nil)
