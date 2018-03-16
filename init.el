@@ -78,6 +78,12 @@
   (use-package fullframe)
   (fullframe magit-status magit-mode-quit-window))
 
+;;* logview
+
+(use-package logview
+  :config
+  (setq logview-additional-submodes '(("SLF4J-1" (format . "TIMESTAMP LEVEL [NAME] (THREAD)") (levels . "SLF4J")))))
+
 ;;* powershell
 
 (use-package powershell)
