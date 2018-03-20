@@ -88,6 +88,12 @@
 
 (use-package powershell)
 
+;;* planuml-mode
+
+(use-package plantuml-mode
+  :mode "\\.puml\\'"
+  :bind (:map plantuml-mode-map ("C-c C-c" . (lambda () (interactive) (plantuml-preview 4)))))
+
 ;;* avy
 
 (use-package avy
