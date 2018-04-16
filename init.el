@@ -167,12 +167,8 @@
   (setq org-src-window-setup 'current-window)
   (setq org-confirm-shell-link-function nil))
 
-(use-package ox-reveal
-  :config
-  (setq org-reveal-root "file:///C:/reveal.js-3.3.0")
-  )
-
 ;;* dired
+
 (use-package dired+
   :load-path "packages/"
   )
