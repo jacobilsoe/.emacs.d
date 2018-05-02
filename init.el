@@ -78,6 +78,17 @@
   (use-package fullframe)
   (fullframe magit-status magit-mode-quit-window))
 
+;;* ediff
+
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-split-window-function 'split-window-horizontally)
+
+(defun jacobilsoe-ediff-hook ()
+  (ediff-setup-keymap)
+  (define-key ediff-mode-map (kbd "M-<down>") 'ediff-next-difference)
+  (define-key ediff-mode-map (kbd "M-<up>") 'ediff-previous-difference))
+(add-hook 'ediff-mode-hook 'jacobilsoe-ediff-hook)
+
 ;;* logview
 
 (use-package logview
