@@ -129,6 +129,11 @@
 
 (use-package json-mode)
 
+;;* csharp-mode
+
+(use-package csharp-mode)
+
+
 ;;* groovy-mode
 
 (use-package groovy-mode
