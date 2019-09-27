@@ -31,6 +31,7 @@
 
 (setq make-backup-files nil)
 (setq large-file-warning-threshold nil)
+(setq create-lockfiles nil)
 (prefer-coding-system 'utf-8)
 
 ;;* mode-line
