@@ -5,7 +5,7 @@
 
 ;;* visuals
 
-(set-face-attribute 'default nil :height 120 :family "Inconsolata")
+(set-face-attribute 'default nil :height 105 :family "InputMono")
 (load-theme 'wombat t)
 (tool-bar-mode 0)
 (setq inhibit-splash-screen t)
