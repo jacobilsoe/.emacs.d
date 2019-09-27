@@ -12,7 +12,7 @@
 
 ;;* fullscreen
 
-(toggle-frame-fullscreen)
+(toggle-frame-maximized)
 (setq w32-grab-focus-on-raise nil)
 
 ;;* editing
