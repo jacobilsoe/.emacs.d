@@ -195,6 +195,7 @@
 (setq diredp-hide-details-initially-flag nil)
 
 (require 'dired+)
+(require 'ls-lisp)
 
 (defun dired-open-file-in-external-app ()
   (interactive)
@@ -210,7 +211,7 @@
 (add-hook 'dired-mode-hook 'hl-line-mode)
 
 (diredp-toggle-find-file-reuse-dir 1)
-
+(setq ls-lisp-use-insert-directory-program nil)
 (setq ls-lisp-dirs-first t)
 (setq ls-lisp-verbosity nil)
 (setq ls-lisp-ignore-case t)
