@@ -56,9 +56,15 @@
 ;;* package
 
 (require 'package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("melpa" . "http://melpa.org/packages/")
-			 ("org" . "http://orgmode.org/elpa/")))
+
+(if (file-directory-p "~/.emacs.d/mirror-elpa")
+    (setq package-archives '(("gnu"   . "~/.emacs.d/mirror-elpa/gnu/")
+			     ("melpa" . "~/.emacs.d/mirror-elpa/melpa/")
+			     ("org"   . "~/.emacs.d/mirror-elpa/org/")))
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			   ("melpa" . "http://melpa.org/packages/")
+			   ("org" . "http://orgmode.org/elpa/"))))
+
 (package-initialize)
 (package-refresh-contents)
 
