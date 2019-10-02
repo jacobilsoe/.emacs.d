@@ -128,12 +128,14 @@
 
 ;;* json-mode
 
-(use-package json-mode)
+(use-package json-mode
+  :config
+  (setq js-indent-level 2)
+  (setq json-reformat:indent-width 2))
 
 ;;* csharp-mode
 
 (use-package csharp-mode)
-
 
 ;;* groovy-mode
 
@@ -187,8 +189,7 @@
 ;;* dired
 
 (use-package dired+
-  :load-path "packages/"
-  )
+  :load-path "packages/")
 
 (use-package dired-narrow)
 
