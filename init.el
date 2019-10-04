@@ -143,6 +143,11 @@
 
 (use-package csharp-mode)
 
+;;* dockerfile-mode
+
+(use-package dockerfile-mode)
+
+
 ;;* groovy-mode
 
 (use-package groovy-mode
