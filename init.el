@@ -147,6 +147,9 @@
 
 (use-package dockerfile-mode)
 
+;;* yaml-mode
+
+(use-package yaml-mode)
 
 ;;* groovy-mode
 
