@@ -151,6 +151,12 @@
 
 (use-package yaml-mode)
 
+;;* rust-mode
+
+(use-package rust-mode
+  :config
+  (add-hook 'rust-mode-hook (lambda () (setq indent-tabs-mode nil))))
+
 ;;* groovy-mode
 
 (use-package groovy-mode
