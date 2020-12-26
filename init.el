@@ -167,8 +167,7 @@
 (use-package whole-line-or-region
   :init
   (require 'whole-line-or-region)
-  (add-to-list 'whole-line-or-region-extensions-alist '(comment-dwim whole-line-or-region-comment-dwim nil))
-  (whole-line-or-region-mode t))
+  (whole-line-or-region-global-mode t))
 
 ;;* swiper
 
