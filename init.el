@@ -157,6 +157,13 @@
   :config
   (add-hook 'rust-mode-hook (lambda () (setq indent-tabs-mode nil))))
 
+;;* haskell-mode
+
+(use-package haskell-mode
+  :bind
+  (:map haskell-mode-map
+	("C-c C-c" . haskell-compile)))
+
 ;;* groovy-mode
 
 (use-package groovy-mode
