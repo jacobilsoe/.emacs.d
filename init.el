@@ -165,8 +165,7 @@
 
 ;;; groovy-mode
 
-(use-package groovy-mode
-  :init (require 'cl))
+(use-package groovy-mode)
 
 ;;; whole-line-or-region
 
