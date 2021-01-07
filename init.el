@@ -1,21 +1,20 @@
-;; -*- orgstruct-heading-prefix-regexp: ";;"; eval: (orgstruct-mode 1) -*-
-;;* general
+;;; general
 
 (server-start)
 
-;;* visuals
+;;; visuals
 
 (set-face-attribute 'default nil :height 105 :family "InputMono")
 (load-theme 'wombat t)
 (tool-bar-mode 0)
 (setq inhibit-splash-screen t)
 
-;;* fullscreen
+;;; fullscreen
 
 (toggle-frame-maximized)
 (setq w32-grab-focus-on-raise nil)
 
-;;* editing
+;;; editing
 
 (setq show-paren-delay 0)
 (show-paren-mode)
@@ -27,20 +26,20 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq confirm-kill-emacs 'yes-or-no-p)
 
-;;* files
+;;; files
 
 (setq make-backup-files nil)
 (setq large-file-warning-threshold nil)
 (setq create-lockfiles nil)
 (prefer-coding-system 'utf-8)
 
-;;* mode-line
+;;; mode-line
 
 (setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M" now) 'face 'font-lock-string-face)))
 (display-time-mode)
 (column-number-mode)
 
-;;* proced
+;;; proced
 
 (defun jic-proced-settings ()
   (proced-toggle-auto-update t)
@@ -49,11 +48,11 @@
   )
 (add-hook 'proced-mode-hook 'jic-proced-settings)
 
-;;* nxml-mode
+;;; nxml-mode
 
 (add-to-list 'auto-mode-alist '("\\.\\(xslt\\|targets\\)\\'" . nxml-mode))
 
-;;* package
+;;; package
 
 (require 'package)
 
@@ -73,7 +72,7 @@
 
 (setq use-package-always-ensure t)
 
-;;* magit
+;;; magit
 
 (use-package magit
   :bind
@@ -85,7 +84,7 @@
   (use-package fullframe)
   (fullframe magit-status magit-mode-quit-window))
 
-;;* ediff
+;;; ediff
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -96,23 +95,23 @@
   (define-key ediff-mode-map (kbd "M-<up>") 'ediff-previous-difference))
 (add-hook 'ediff-mode-hook 'jacobilsoe-ediff-hook)
 
-;;* logview
+;;; logview
 
 (use-package logview
   :config
   (setq logview-additional-submodes '(("SLF4J-1" (format . "TIMESTAMP LEVEL [NAME] (THREAD)") (levels . "SLF4J"))("LOG4NET-1" (format . "TIMESTAMP [THREAD] LEVEL NAME (IGNORED)") (levels . "SLF4J")))))
 
-;;* powershell
+;;; powershell
 
 (use-package powershell)
 
-;;* planuml-mode
+;;; planuml-mode
 
 (use-package plantuml-mode
   :mode "\\.puml\\'"
   :bind (:map plantuml-mode-map ("C-c C-c" . (lambda () (interactive) (plantuml-preview 4)))))
 
-;;* avy
+;;; avy
 
 (use-package avy
   :bind
@@ -120,63 +119,63 @@
   :config
   (setq avy-timeout-seconds 0.3))
 
-;;* ace-window
+;;; ace-window
 
 (use-package ace-window
   :bind
   (("M-p" . ace-window)))
 
-;;* scala-mode
+;;; scala-mode
 
 (use-package scala-mode
   :interpreter
   ("scala" . scala-mode))
 
-;;* json-mode
+;;; json-mode
 
 (use-package json-mode
   :config
   (setq js-indent-level 2)
   (setq json-reformat:indent-width 2))
 
-;;* csharp-mode
+;;; csharp-mode
 
 (use-package csharp-mode)
 
-;;* dockerfile-mode
+;;; dockerfile-mode
 
 (use-package dockerfile-mode)
 
-;;* yaml-mode
+;;; yaml-mode
 
 (use-package yaml-mode)
 
-;;* rust-mode
+;;; rust-mode
 
 (use-package rust-mode
   :config
   (add-hook 'rust-mode-hook (lambda () (setq indent-tabs-mode nil))))
 
-;;* haskell-mode
+;;; haskell-mode
 
 (use-package haskell-mode
   :bind
   (:map haskell-mode-map
 	("C-c C-c" . haskell-compile)))
 
-;;* groovy-mode
+;;; groovy-mode
 
 (use-package groovy-mode
   :init (require 'cl))
 
-;;* whole-line-or-region
+;;; whole-line-or-region
 
 (use-package whole-line-or-region
   :init
   (require 'whole-line-or-region)
   (whole-line-or-region-global-mode t))
 
-;;* swiper
+;;; swiper
 
 (defun jacobilsoe-swiper ()
   (interactive)
@@ -191,7 +190,7 @@
   :config
   (ivy-mode))
 
-;;* auto-package-update
+;;; auto-package-update
 
 (use-package auto-package-update
   :demand
@@ -201,7 +200,7 @@
   (setq auto-package-update-interval 1)
   (auto-package-update-at-time "05:00"))
 
-;;* org
+;;; org
 
 (use-package org
   :bind
@@ -212,7 +211,7 @@
   (setq org-src-window-setup 'current-window)
   (setq org-confirm-shell-link-function nil))
 
-;;* dired
+;;; dired
 
 (use-package dired+
   :load-path "packages/")
