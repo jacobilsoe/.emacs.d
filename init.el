@@ -199,6 +199,22 @@
   (setq auto-package-update-interval 1)
   (auto-package-update-at-time "05:00"))
 
+;;; openwith
+
+(use-package openwith
+  :config
+  (setq openwith-associations
+        (list
+         (list (openwith-make-extension-regexp
+                '("mpg" "mpeg" "mp4" "avi" "wmv" "mov" "flv" "mkv"))
+               "mpv"
+               '(file))
+         (list (openwith-make-extension-regexp
+                '("xbm" "pbm" "pgm" "ppm" "pnm" "png" "gif" "bmp" "tif" "jpg" "jpeg" "cr2"))
+               "feh"
+               '("--start-at" file))))
+  (openwith-mode 1))
+
 ;;; org
 
 (use-package org
@@ -217,30 +233,28 @@
 
 (use-package dired-narrow)
 
-(setq diredp-hide-details-initially-flag nil)
-
 (require 'dired+)
+
+;; Enable ls-lisp
 (require 'ls-lisp)
+(setq ls-lisp-use-insert-directory-program nil)
 
-(defun dired-open-file-in-external-app ()
-  (interactive)
-  (cond ((eq system-type 'gnu/linux)
-	 (let* ((file (dired-get-filename nil t))) (call-process "xdg-open" nil 0 nil file)))
-	((eq system-type 'windows-nt)
-	 (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" (dired-get-filename) t t)))))
-
-(define-key dired-mode-map (kbd "M-RET") 'dired-open-file-in-external-app)
+;; Key bindings
 (define-key dired-mode-map (kbd "C-<up>") 'diredp-up-directory)
 (define-key dired-mode-map (kbd "C-n") 'dired-narrow)
 
+;; Show active line
 (add-hook 'dired-mode-hook 'hl-line-mode)
 
+;; Only use a single buffer for dired
 (diredp-toggle-find-file-reuse-dir 1)
-(setq ls-lisp-use-insert-directory-program nil)
+
+;; Different ls-lisp formatting options
 (setq ls-lisp-dirs-first t)
 (setq ls-lisp-verbosity nil)
 (setq ls-lisp-ignore-case t)
 
+;; Use thousand separator in file size
 (defun group-number (num &optional size char)
   "Format NUM as string grouped to SIZE with CHAR."
   ;; Based on code for `math-group-float' in calc-ext.el
@@ -272,11 +286,12 @@
     (save-match-data
       (goto-char (point-min))
       (when (re-search-forward "^ *total used in directory \\([0-9]+\\) available \\([0-9]+\\)")
-	(replace-match (format "%s k" (group-number (match-string 1) 3 ".")) nil nil nil 1)
-	(replace-match (format "%s k" (group-number (match-string 2) 3 ".")) nil nil nil 2)
-	))))
+ 	(replace-match (format "%s k" (group-number (match-string 1) 3 ".")) nil nil nil 1)
+ 	(replace-match (format "%s k" (group-number (match-string 2) 3 ".")) nil nil nil 2)
+ 	))))
 (advice-add 'insert-directory :after #'my-insert-directory)
 
+;; Ensure jumping to beginning and end of buffer stays within file list
 (defun my-dired-jump-to-first-entry ()
   (interactive)
   (beginning-of-buffer)
@@ -293,9 +308,11 @@
 (define-key dired-mode-map
   (vector 'remap 'end-of-buffer) 'my-dired-jump-to-last-entry)
 
+;; Use custom format for time
 (setq ls-lisp-format-time-list  '("%Y-%m-%d %H:%M" "%Y-%m-%d %H:%M"))
 (setq ls-lisp-use-localized-time-format t)
 
+;; Ensure external changes are reflected in dired
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 (setq auto-revert-verbose nil)
 (setq auto-revert-interval 1)
