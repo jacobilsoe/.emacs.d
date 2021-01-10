@@ -215,6 +215,13 @@
                '("--start-at" file))))
   (openwith-mode 1))
 
+;;; all-the-icons
+
+(use-package all-the-icons)
+(use-package all-the-icons-dired
+  :init
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+
 ;;; org
 
 (use-package org
