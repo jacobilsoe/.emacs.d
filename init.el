@@ -76,7 +76,7 @@
 
 (use-package magit
   :bind
-  (("C-x g" . magit-status))
+  ("C-x g" . magit-status)
   :config
   (add-hook 'git-commit-setup-hook 'turn-off-auto-fill t)
   (setq git-commit-summary-max-length 999)
@@ -115,7 +115,7 @@
 
 (use-package avy
   :bind
-  (("C-'" . avy-goto-char-timer))
+  ("C-'" . avy-goto-char-timer)
   :config
   (setq avy-timeout-seconds 0.3))
 
@@ -123,7 +123,7 @@
 
 (use-package ace-window
   :bind
-  (("M-p" . ace-window)))
+  ("M-p" . ace-window))
 
 ;;; scala-mode
 
@@ -185,7 +185,7 @@
 (use-package swiper
   :demand
   :bind
-  (("C-s" . jacobilsoe-swiper))
+  ("C-s" . jacobilsoe-swiper)
   :config
   (ivy-mode))
 
@@ -226,7 +226,7 @@
 
 (use-package org
   :bind
-  (("C-c a" . org-agenda))
+  ("C-c a" . org-agenda)
   :config
   (setq org-agenda-files '("~/Dropbox/Documents"))
   (setq org-tags-column 0)
@@ -245,10 +245,6 @@
   (setq auto-revert-verbose nil)
   (setq auto-revert-interval 1))
 
-;; Use dired-narrow
-(use-package dired-narrow)
-(define-key dired-mode-map (kbd "C-n") 'dired-narrow)
-
 ;; Ensure jumping to beginning and end of buffer stays within file list
 (defun my-dired-jump-to-first-entry ()
   (interactive)
@@ -261,7 +257,12 @@
   (dired-next-line -1))
 (define-key dired-mode-map [remap end-of-buffer] 'my-dired-jump-to-last-entry)
 
+;; Use dired-narrow
+(use-package dired-narrow
+  :bind (:map dired-mode-map ("C-n" . dired-narrow)))
+
 ;; Ensure only a single dired buffer is used
-(use-package dired-single)
-(define-key dired-mode-map [remap dired-find-file] 'dired-single-buffer)
-(define-key dired-mode-map [remap dired-up-directory] 'dired-single-up-directory)
+(use-package dired-single
+  :bind (:map dired-mode-map
+              ([remap dired-find-file] . dired-single-buffer)
+              ([remap dired-up-directory] . dired-single-up-directory)))
