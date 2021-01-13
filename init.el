@@ -123,7 +123,7 @@
 
 (use-package ace-window
   :bind
-  ("M-p" . ace-window))
+  ("M-o" . ace-window))
 
 ;;; scala-mode
 
