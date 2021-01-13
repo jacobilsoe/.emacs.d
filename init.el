@@ -243,7 +243,8 @@
   :config
   (setq dired-listing-switches "-agho --group-directories-first --time-style=long-iso")
   (setq auto-revert-verbose nil)
-  (setq auto-revert-interval 1))
+  (setq auto-revert-interval 1)
+  (setq dired-dwim-target t))
 
 ;; Ensure jumping to beginning and end of buffer stays within file list
 (defun my-dired-jump-to-first-entry ()
