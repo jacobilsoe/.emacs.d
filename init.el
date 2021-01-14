@@ -70,6 +70,7 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
+(require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
 ;;; magit
@@ -236,6 +237,7 @@
 ;;; dired
 
 (use-package dired
+  :ensure nil
   :hook
   (dired-mode . dired-hide-details-mode)
   (dired-mode . hl-line-mode)
