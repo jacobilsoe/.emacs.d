@@ -263,9 +263,3 @@
 ;; Use dired-narrow
 (use-package dired-narrow
   :bind (:map dired-mode-map ("C-n" . dired-narrow)))
-
-;; Ensure only a single dired buffer is used
-(use-package dired-single
-  :bind (:map dired-mode-map
-              ([remap dired-find-file] . dired-single-buffer)
-              ([remap dired-up-directory] . dired-single-up-directory)))
