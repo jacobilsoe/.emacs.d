@@ -232,7 +232,11 @@
   (setq org-agenda-files '("~/Dropbox/Documents"))
   (setq org-tags-column 0)
   (setq org-src-window-setup 'current-window)
-  (setq org-confirm-shell-link-function nil))
+  (setq org-confirm-shell-link-function nil)
+  (setq org-habit-graph-column 50)
+  (setq org-habit-show-all-today t)
+  (setq org-log-into-drawer t)
+  (add-to-list 'org-modules 'org-habit))
 
 ;;; dired
 
