@@ -236,7 +236,14 @@
   (setq org-habit-graph-column 50)
   (setq org-habit-show-all-today t)
   (setq org-log-into-drawer t)
+  (setq org-hide-leading-stars t)
   (add-to-list 'org-modules 'org-habit))
+
+;;; org-superstar
+
+(use-package org-superstar
+  :after org
+  :hook (org-mode . org-superstar-mode))
 
 ;;; dired
 
