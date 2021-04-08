@@ -218,6 +218,8 @@
 
 (use-package all-the-icons)
 (use-package all-the-icons-dired
+  :config
+  (setq all-the-icons-dired-monochrome nil)
   :hook
   (dired-mode . all-the-icons-dired-mode))
 
