@@ -223,6 +223,8 @@
   :hook
   (dired-mode . all-the-icons-dired-mode))
 
+(setq inhibit-compacting-font-caches t)
+
 ;;; org
 
 (use-package org
