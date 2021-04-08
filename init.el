@@ -207,11 +207,11 @@
          (list (openwith-make-extension-regexp
                 '("mpg" "mpeg" "mp4" "avi" "wmv" "mov" "flv" "mkv"))
                "mpv"
-               '(file))
+               '("--fullscreen" file))
          (list (openwith-make-extension-regexp
                 '("xbm" "pbm" "pgm" "ppm" "pnm" "png" "gif" "bmp" "tif" "jpg" "jpeg" "cr2"))
                "feh"
-               '("--start-at" file))))
+               '("--fullscreen" "--start-at" file))))
   (openwith-mode 1))
 
 ;;; all-the-icons
