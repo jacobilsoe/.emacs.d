@@ -35,9 +35,13 @@
 
 ;;; mode-line
 
-(setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M" now) 'face 'font-lock-string-face)))
+(setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M" now))))
 (display-time-mode)
 (column-number-mode)
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
 
 ;;; proced
 
