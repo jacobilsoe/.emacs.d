@@ -39,9 +39,14 @@
 (display-time-mode)
 (column-number-mode)
 
+(use-package minions
+  :hook (doom-modeline-mode . minions-mode))
+
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode 1)
+  :custom
+  (doom-modeline-minor-modes t))
 
 ;;; proced
 
