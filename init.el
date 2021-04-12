@@ -248,6 +248,7 @@
   (setq org-habit-show-all-today t)
   (setq org-log-into-drawer t)
   (setq org-hide-leading-stars t)
+  (setq org-startup-folded t)
   (add-to-list 'org-modules 'org-habit))
 
 ;;; org-superstar
