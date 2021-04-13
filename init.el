@@ -33,6 +33,25 @@
 (setq create-lockfiles nil)
 (prefer-coding-system 'utf-8)
 
+;;; package
+
+(require 'package)
+
+(if (file-directory-p "~/.emacs.d/mirror-elpa")
+    (setq package-archives '(("gnu"   . "~/.emacs.d/mirror-elpa/gnu/")
+			     ("melpa" . "~/.emacs.d/mirror-elpa/melpa/")))
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			   ("melpa" . "http://melpa.org/packages/"))))
+
+(package-initialize)
+(package-refresh-contents)
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
 ;;; mode-line
 
 (setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M" now))))
@@ -60,25 +79,6 @@
 ;;; nxml-mode
 
 (add-to-list 'auto-mode-alist '("\\.\\(xslt\\|targets\\)\\'" . nxml-mode))
-
-;;; package
-
-(require 'package)
-
-(if (file-directory-p "~/.emacs.d/mirror-elpa")
-    (setq package-archives '(("gnu"   . "~/.emacs.d/mirror-elpa/gnu/")
-			     ("melpa" . "~/.emacs.d/mirror-elpa/melpa/")))
-  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			   ("melpa" . "http://melpa.org/packages/"))))
-
-(package-initialize)
-(package-refresh-contents)
-
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
 
 ;;; magit
 
