@@ -283,6 +283,15 @@
   (dired-next-line -1))
 (define-key dired-mode-map [remap end-of-buffer] 'my-dired-jump-to-last-entry)
 
+;; Add possibility to force open a file in an external application
+(defun dired-open-file-in-external-app ()
+  (interactive)
+  (cond ((eq system-type 'gnu/linux)
+	 (let* ((file (dired-get-filename nil t))) (call-process "xdg-open" nil 0 nil file)))
+	((eq system-type 'windows-nt)
+	 (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" (dired-get-filename) t t)))))
+(define-key dired-mode-map (kbd "M-RET") 'dired-open-file-in-external-app)
+
 ;; Use dired-narrow
 (use-package dired-narrow
   :bind (:map dired-mode-map ("C-n" . dired-narrow)))
