@@ -232,6 +232,9 @@
   (setq all-the-icons-dired-monochrome nil)
   :hook
   (dired-mode . all-the-icons-dired-mode))
+(use-package all-the-icons-ibuffer
+  :ensure t
+  :init (all-the-icons-ibuffer-mode 1))
 
 (setq inhibit-compacting-font-caches t)
 
