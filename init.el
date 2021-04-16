@@ -271,7 +271,7 @@
   (dired-mode . auto-revert-mode)
   :config
   (setq dired-listing-switches "-agho --group-directories-first --time-style=long-iso")
-  (setq ls-lisp-emulation 'MS-Windows)
+  (setq ls-lisp-use-insert-directory-program t)
   (setq auto-revert-verbose nil)
   (setq auto-revert-interval 1)
   (setq dired-dwim-target t))
