@@ -9,6 +9,12 @@
 (tool-bar-mode 0)
 (setq inhibit-splash-screen t)
 
+;; Pulse current line
+(defun my-pulse-line (&rest _)
+      (pulse-momentary-highlight-one-line (point)))
+(dolist (command '(recenter-top-bottom other-window ace-window))
+  (advice-add command :after #'my-pulse-line))
+
 ;;; fullscreen
 
 (toggle-frame-maximized)
