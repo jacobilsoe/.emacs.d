@@ -261,6 +261,10 @@
   (setq org-startup-folded t)
   (add-to-list 'org-modules 'org-habit))
 
+;;; hydra
+
+(use-package hydra)
+
 ;;; org-superstar
 
 (use-package org-superstar
@@ -287,6 +291,36 @@
 	((eq system-type 'windows-nt)
 	 (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" (dired-get-filename) t t)))))
 
+(defhydra hydra-dired (:color pink :hint nil)
+"
+^Mark^                  ^Operate^                  ^View^
+^^^^^^-------------------------------------------------------------------
+_m_   : mark            _C_   : copy               _g_   : refresh
+_% m_ : mark regexp     _% C_ : copy regexp        _(_   : toggle details
+_% g_ : mark containing _R_   : rename/move        _C-n_ : narrow
+_u_   : unmark          _% R_ : rename/move regexp _s_   : toggle sorting
+_U_   : unmark all      _D_   : delete
+_t_   : toogle marks    _Z_   : compress
+"
+("m" dired-mark)
+("% m" dired-mark-files-regexp)
+("% g" dired-mark-files-containing-regexp)
+("u" dired-unmark)
+("U" dired-unmark-all-marks)
+("t" dired-toggle-marks)
+("C" dired-do-copy)
+("% C" dired-do-copy-regexp)
+("R" dired-do-rename)
+("% R" dired-do-rename-regexp)
+("D" dired-do-delete)
+("Z" dired-do-compress)
+("g" revert-buffer)
+("(" dired-hide-details-mode)
+("C-n" dired-narrow)
+("s" dired-sort-toggle-or-edit)
+("q" quit-window "quit" :color blue)
+("." nil :color blue))
+
 (use-package dired
   :ensure nil
   :hook
@@ -302,7 +336,8 @@
   :bind (:map dired-mode-map
 	      ([remap beginning-of-buffer] . 'my-dired-jump-to-first-entry)
 	      ([remap end-of-buffer] . 'my-dired-jump-to-last-entry)
-	      ("M-RET" . 'dired-open-file-in-external-app)))
+	      ("M-RET" . 'dired-open-file-in-external-app)
+	      ("." . 'hydra-dired/body)))
 
 ;; Use dired-narrow
 (use-package dired-narrow
