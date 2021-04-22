@@ -299,8 +299,9 @@ _m_   : mark            _C_   : copy               _g_   : refresh
 _% m_ : mark regexp     _% C_ : copy regexp        _(_   : toggle details
 _% g_ : mark containing _R_   : rename/move        _C-n_ : narrow
 _u_   : unmark          _% R_ : rename/move regexp _s_   : toggle sorting
-_U_   : unmark all      _D_   : delete
+_U_   : unmark all      _D_   : delete             _v_   : view file
 _t_   : toogle marks    _Z_   : compress
+^ ^                     _c_   : compress to
 "
 ("m" dired-mark)
 ("% m" dired-mark-files-regexp)
@@ -314,10 +315,12 @@ _t_   : toogle marks    _Z_   : compress
 ("% R" dired-do-rename-regexp)
 ("D" dired-do-delete)
 ("Z" dired-do-compress)
+("c" dired-do-compress-to)
 ("g" revert-buffer)
 ("(" dired-hide-details-mode)
 ("C-n" dired-narrow)
 ("s" dired-sort-toggle-or-edit)
+("v" dired-view-file)
 ("q" quit-window "quit" :color blue)
 ("." nil :color blue))
 
