@@ -269,6 +269,24 @@
 
 ;;; dired
 
+;; Ensure jumping to beginning and end of buffer stays within file list
+(defun my-dired-jump-to-first-entry ()
+  (interactive)
+  (beginning-of-buffer)
+  (dired-goto-next-nontrivial-file))
+(defun my-dired-jump-to-last-entry ()
+  (interactive)
+  (end-of-buffer)
+  (dired-next-line -1))
+
+;; Add possibility to force open a file in an external application
+(defun dired-open-file-in-external-app ()
+  (interactive)
+  (cond ((eq system-type 'gnu/linux)
+	 (let* ((file (dired-get-filename nil t))) (call-process "xdg-open" nil 0 nil file)))
+	((eq system-type 'windows-nt)
+	 (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" (dired-get-filename) t t)))))
+
 (use-package dired
   :ensure nil
   :hook
@@ -280,29 +298,13 @@
   (setq ls-lisp-use-insert-directory-program t)
   (setq auto-revert-verbose nil)
   (setq auto-revert-interval 1)
-  (setq dired-dwim-target t))
-
-;; Ensure jumping to beginning and end of buffer stays within file list
-(defun my-dired-jump-to-first-entry ()
-  (interactive)
-  (beginning-of-buffer)
-  (dired-goto-next-nontrivial-file))
-(define-key dired-mode-map [remap beginning-of-buffer] 'my-dired-jump-to-first-entry)
-(defun my-dired-jump-to-last-entry ()
-  (interactive)
-  (end-of-buffer)
-  (dired-next-line -1))
-(define-key dired-mode-map [remap end-of-buffer] 'my-dired-jump-to-last-entry)
-
-;; Add possibility to force open a file in an external application
-(defun dired-open-file-in-external-app ()
-  (interactive)
-  (cond ((eq system-type 'gnu/linux)
-	 (let* ((file (dired-get-filename nil t))) (call-process "xdg-open" nil 0 nil file)))
-	((eq system-type 'windows-nt)
-	 (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" (dired-get-filename) t t)))))
-(define-key dired-mode-map (kbd "M-RET") 'dired-open-file-in-external-app)
+  (setq dired-dwim-target t)
+  :bind (:map dired-mode-map
+	      ([remap beginning-of-buffer] . 'my-dired-jump-to-first-entry)
+	      ([remap end-of-buffer] . 'my-dired-jump-to-last-entry)
+	      ("M-RET" . 'dired-open-file-in-external-app)))
 
 ;; Use dired-narrow
 (use-package dired-narrow
+  :after dired
   :bind (:map dired-mode-map ("C-n" . dired-narrow)))
