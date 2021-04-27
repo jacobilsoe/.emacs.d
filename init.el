@@ -291,16 +291,26 @@
 	((eq system-type 'windows-nt)
 	 (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" (dired-get-filename) t t)))))
 
+(defun dired-get-size ()
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (with-temp-buffer
+      (apply 'call-process "du" nil t nil "-sch" files)
+      (message "Total size: %s"
+               (progn
+                 (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
+                 (match-string 1))))))
+
 (defhydra hydra-dired (:color pink :hint nil)
 "
-^Mark^                  ^Operate^                  ^View^
-^^^^^^-------------------------------------------------------------------
-_m_   : mark            _C_   : copy               _g_   : refresh
-_% m_ : mark regexp     _% C_ : copy regexp        _(_   : toggle details
-_% g_ : mark containing _R_   : rename/move        _C-n_ : narrow
-_u_   : unmark          _% R_ : rename/move regexp _s_   : toggle sorting
-_U_   : unmark all      _D_   : delete             _v_   : view file
-_t_   : toogle marks    _Z_   : compress
+^Mark^                  ^Operate^                   ^View^
+^^^^^^-------------------------------------------------------------------------
+_m_   : mark            _C_   : copy                _g_       : refresh
+_% m_ : mark regexp     _% C_ : copy regexp         _(_       : toggle details
+_% g_ : mark containing _R_   : rename/move         _C-n_     : narrow
+_u_   : unmark          _% R_ : rename/move regexp  _s_       : toggle sorting
+_U_   : unmark all      _D_   : delete              _v_       : view file
+_t_   : toogle marks    _Z_   : compress/uncompress _M-s M-s_ : show total size
 ^ ^                     _c_   : compress to
 "
 ("m" dired-mark)
@@ -321,6 +331,7 @@ _t_   : toogle marks    _Z_   : compress
 ("C-n" dired-narrow)
 ("s" dired-sort-toggle-or-edit)
 ("v" dired-view-file)
+("M-s M-s" dired-get-size)
 ("q" quit-window "quit" :color blue)
 ("." nil :color blue))
 
@@ -340,6 +351,7 @@ _t_   : toogle marks    _Z_   : compress
 	      ([remap beginning-of-buffer] . 'my-dired-jump-to-first-entry)
 	      ([remap end-of-buffer] . 'my-dired-jump-to-last-entry)
 	      ("M-RET" . 'dired-open-file-in-external-app)
+	      ("M-s M-s" . 'dired-get-size)
 	      ("." . 'hydra-dired/body)))
 
 ;; Use dired-narrow
