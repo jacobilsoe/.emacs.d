@@ -276,7 +276,9 @@
 
 (use-package stripe-buffer
   :after org
-  :hook (org-mode . turn-on-stripe-table-mode))
+  :hook (org-mode . turn-on-stripe-table-mode)
+  :config
+  (setq stripe-in-table-regex "^[ 	]*\\(?1:[|+][^-].+[|+]\\) *$"))
 
 ;;; dired
 
