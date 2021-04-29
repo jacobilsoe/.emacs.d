@@ -305,14 +305,14 @@
 (defhydra hydra-dired (:color pink :hint nil)
 "
 ^Mark^                  ^Operate^                   ^View^
-^^^^^^-------------------------------------------------------------------------
+^^^^^^------------------------------------------------------------------------------
 _m_   : mark            _C_   : copy                _g_       : refresh
 _% m_ : mark regexp     _% C_ : copy regexp         _(_       : toggle details
 _% g_ : mark containing _R_   : rename/move         _C-n_     : narrow
 _u_   : unmark          _% R_ : rename/move regexp  _s_       : toggle sorting
 _U_   : unmark all      _D_   : delete              _v_       : view file
 _t_   : toogle marks    _Z_   : compress/uncompress _M-s M-s_ : show total size
-^ ^                     _c_   : compress to
+^ ^                     _c_   : compress to         _o_       : open in other window
 "
 ("m" dired-mark)
 ("% m" dired-mark-files-regexp)
@@ -333,6 +333,7 @@ _t_   : toogle marks    _Z_   : compress/uncompress _M-s M-s_ : show total size
 ("s" dired-sort-toggle-or-edit)
 ("v" dired-view-file)
 ("M-s M-s" dired-get-size)
+("o" dired-find-file-other-window)
 ("q" quit-window "quit" :color blue)
 ("." nil :color blue))
 
