@@ -272,6 +272,12 @@
   :after org
   :hook (org-mode . org-superstar-mode))
 
+;;; stripe-buffer
+
+(use-package stripe-buffer
+  :after org
+  :hook (org-mode . turn-on-stripe-table-mode))
+
 ;;; dired
 
 ;; Ensure jumping to beginning and end of buffer stays within file list
