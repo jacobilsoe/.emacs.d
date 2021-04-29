@@ -343,7 +343,7 @@ _t_   : toogle marks    _Z_   : compress/uncompress _M-s M-s_ : show total size
 ("M-s M-s" dired-get-size)
 ("o" dired-find-file-other-window)
 ("q" quit-window "quit" :color blue)
-("." nil :color blue))
+("?" nil :color blue))
 
 (use-package dired
   :ensure nil
@@ -362,7 +362,7 @@ _t_   : toogle marks    _Z_   : compress/uncompress _M-s M-s_ : show total size
 	      ([remap end-of-buffer] . 'my-dired-jump-to-last-entry)
 	      ("M-RET" . 'dired-open-file-in-external-app)
 	      ("M-s M-s" . 'dired-get-size)
-	      ("." . 'hydra-dired/body)))
+	      ("?" . 'hydra-dired/body)))
 
 ;; Use dired-narrow
 (use-package dired-narrow
