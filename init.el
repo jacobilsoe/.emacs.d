@@ -276,14 +276,6 @@
   :after org
   :hook (org-mode . org-superstar-mode))
 
-;;; stripe-buffer
-
-(use-package stripe-buffer
-  :after org
-  :hook (org-mode . turn-on-stripe-table-mode)
-  :config
-  (setq stripe-in-table-regex "^[ 	]*\\(?1:[|+][^-].+[|+]\\) *$"))
-
 ;;; dired
 
 ;; Ensure jumping to beginning and end of buffer stays within file list
