@@ -157,6 +157,10 @@
 
 (use-package csharp-mode)
 
+;;; markdown-mode
+
+(use-package markdown-mode)
+
 ;;; dockerfile-mode
 
 (use-package dockerfile-mode)
