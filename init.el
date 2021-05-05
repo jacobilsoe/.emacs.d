@@ -96,6 +96,7 @@
   (add-hook 'git-commit-setup-hook 'turn-off-auto-fill t)
   (setq git-commit-summary-max-length 999)
   (setq magit-push-always-verify nil)
+  (setq magit-diff-refine-hunk 'all)
   (use-package fullframe)
   (fullframe magit-status magit-mode-quit-window))
 
