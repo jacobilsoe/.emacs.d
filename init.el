@@ -280,6 +280,11 @@
   :after org
   :hook (org-mode . org-superstar-mode))
 
+;;; org-present
+
+(use-package org-present
+  :after org)
+
 ;;; dired
 
 ;; Ensure jumping to beginning and end of buffer stays within file list
