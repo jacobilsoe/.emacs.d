@@ -265,7 +265,10 @@
   (setq org-hide-leading-stars t)
   (setq org-startup-folded t)
   (add-to-list 'org-modules 'org-habit)
-  (plist-put org-calc-default-modes 'calc-float-format '(float 12)))
+  (plist-put org-calc-default-modes 'calc-float-format '(float 12))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t) (shell . t))))
 
 ;;; hydra
 
