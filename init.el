@@ -268,7 +268,8 @@
   (plist-put org-calc-default-modes 'calc-float-format '(float 12))
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((emacs-lisp . t) (shell . t))))
+   '((emacs-lisp . t) (shell . t)))
+  (setq org-file-apps-gnu (append '((t . "setsid -w xdg-open %s")) org-file-apps-gnu)))
 
 ;;; hydra
 
