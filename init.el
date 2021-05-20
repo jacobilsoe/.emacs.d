@@ -104,6 +104,7 @@
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-diff-options "--text")
 
 (defun jacobilsoe-ediff-hook ()
   (ediff-setup-keymap)
