@@ -32,6 +32,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq confirm-kill-emacs 'yes-or-no-p)
 (defalias 'list-buffers 'ibuffer)
+(winner-mode 1)
 
 ;;; files
 
