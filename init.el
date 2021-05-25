@@ -364,6 +364,8 @@ _t_   : toogle marks    _Z_   : compress/uncompress _M-s M-s_ : show total size
   (setq auto-revert-verbose nil)
   (setq auto-revert-interval 1)
   (setq dired-dwim-target t)
+  (setq dired-recursive-deletes 'always)
+  (setq dired-recursive-copies 'always)
   :bind (:map dired-mode-map
 	      ([remap beginning-of-buffer] . 'my-dired-jump-to-first-entry)
 	      ([remap end-of-buffer] . 'my-dired-jump-to-last-entry)
