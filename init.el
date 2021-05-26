@@ -318,6 +318,23 @@
                  (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
                  (match-string 1))))))
 
+(defun jic/ediff-marked-pair ()
+  (interactive)
+  (let* ((marked-files (dired-get-marked-files nil nil))
+         (other-win (get-window-with-predicate
+                     (lambda (window)
+                       (with-current-buffer (window-buffer window)
+                         (and (not (eq window (selected-window)))
+                              (eq major-mode 'dired-mode))))))
+         (other-marked-files (and other-win
+                                  (with-current-buffer (window-buffer other-win)
+                                    (dired-get-marked-files nil)))))
+    (cond ((= (length marked-files) 2)
+           (ediff-files (nth 0 marked-files) (nth 1 marked-files)))
+          ((and (= (length marked-files) 1) (= (length other-marked-files) 1))
+           (ediff-files (nth 0 marked-files) (nth 0 other-marked-files)))
+          (t (error "Please mark exactly 2 files, at least one locally")))))
+
 (defhydra hydra-dired (:color pink :hint nil)
 "
 ^Mark^                  ^Operate^                   ^View^
@@ -329,6 +346,7 @@ _u_   : unmark          _% R_ : rename/move regexp  _s_       : toggle sorting
 _U_   : unmark all      _D_   : delete              _v_       : view file
 _t_   : toogle marks    _Z_   : compress/uncompress _M-s M-s_ : show total size
 ^ ^                     _c_   : compress to         _o_       : open in other window
+^ ^                     _=_   : ediff marked pair   ^ ^
 "
 ("m" dired-mark)
 ("% m" dired-mark-files-regexp)
@@ -350,6 +368,7 @@ _t_   : toogle marks    _Z_   : compress/uncompress _M-s M-s_ : show total size
 ("v" dired-view-file)
 ("M-s M-s" dired-get-size)
 ("o" dired-find-file-other-window)
+("=" jic/ediff-marked-pair)
 ("q" quit-window "quit" :color blue)
 ("?" nil :color blue))
 
@@ -372,6 +391,7 @@ _t_   : toogle marks    _Z_   : compress/uncompress _M-s M-s_ : show total size
 	      ([remap end-of-buffer] . 'my-dired-jump-to-last-entry)
 	      ("M-RET" . 'dired-open-file-in-external-app)
 	      ("M-s M-s" . 'dired-get-size)
+	      ("=" . 'jic/ediff-marked-pair)
 	      ("?" . 'hydra-dired/body)))
 
 ;; Use dired-narrow
