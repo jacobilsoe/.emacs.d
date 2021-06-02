@@ -103,15 +103,14 @@
 
 ;;; ediff
 
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq ediff-diff-options "--text")
-
-(defun jacobilsoe-ediff-hook ()
-  (ediff-setup-keymap)
-  (define-key ediff-mode-map (kbd "M-<down>") 'ediff-next-difference)
-  (define-key ediff-mode-map (kbd "M-<up>") 'ediff-previous-difference))
-(add-hook 'ediff-mode-hook 'jacobilsoe-ediff-hook)
+(use-package ediff
+  :bind
+  ("M-<down>" . ediff-next-difference)
+  ("M-<up>" . ediff-previous-difference)
+  :config
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  (setq ediff-split-window-function 'split-window-horizontally)
+  (setq ediff-diff-options "--text"))
 
 ;;; logview
 
