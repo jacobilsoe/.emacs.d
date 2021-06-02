@@ -110,7 +110,11 @@
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
   (setq ediff-split-window-function 'split-window-horizontally)
-  (setq ediff-diff-options "--text"))
+  (setq ediff-diff-options "--text")
+  :custom-face
+  (ediff-current-diff-A ((t (:extend t :background "#553333" :foreground "white"))))
+  (ediff-current-diff-B ((t (:extend t :background "#335533" :foreground "white"))))
+  (ediff-current-diff-C ((t (:extend t :background "#888833" :foreground "white")))))
 
 ;;; logview
 
