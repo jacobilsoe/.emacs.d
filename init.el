@@ -10,10 +10,10 @@
 (setq inhibit-splash-screen t)
 
 ;; Pulse current line
-(defun my-pulse-line (&rest _)
+(defun ji/pulse-line (&rest _)
       (pulse-momentary-highlight-one-line (point)))
 (dolist (command '(recenter-top-bottom other-window ace-window))
-  (advice-add command :after #'my-pulse-line))
+  (advice-add command :after #'ji/pulse-line))
 
 ;;; fullscreen
 
@@ -77,12 +77,12 @@
 
 ;;; proced
 
-(defun jic-proced-settings ()
+(defun ji/proced-settings ()
   (proced-toggle-auto-update t)
   (setq proced-auto-update-interval 1)
   (setq proced-format 'medium)
   )
-(add-hook 'proced-mode-hook 'jic-proced-settings)
+(add-hook 'proced-mode-hook 'ji/proced-settings)
 
 ;;; nxml-mode
 
@@ -201,7 +201,7 @@
 
 ;;; swiper
 
-(defun jacobilsoe-swiper ()
+(defun ji/swiper ()
   (interactive)
   (if (> (buffer-size) 1000000)
       (isearch-forward)
@@ -210,7 +210,7 @@
 (use-package swiper
   :demand
   :bind
-  ("C-s" . jacobilsoe-swiper)
+  ("C-s" . ji/swiper)
   :config
   (ivy-mode))
 
@@ -294,24 +294,24 @@
 ;;; dired
 
 ;; Ensure jumping to beginning and end of buffer stays within file list
-(defun my-dired-jump-to-first-entry ()
+(defun ji/dired-jump-to-first-entry ()
   (interactive)
   (beginning-of-buffer)
   (dired-goto-next-nontrivial-file))
-(defun my-dired-jump-to-last-entry ()
+(defun ji/dired-jump-to-last-entry ()
   (interactive)
   (end-of-buffer)
   (dired-next-line -1))
 
 ;; Add possibility to force open a file in an external application
-(defun dired-open-file-in-external-app ()
+(defun ji/dired-open-file-in-external-app ()
   (interactive)
   (cond ((eq system-type 'gnu/linux)
 	 (let* ((file (dired-get-filename nil t))) (call-process "xdg-open" nil 0 nil file)))
 	((eq system-type 'windows-nt)
 	 (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" (dired-get-filename) t t)))))
 
-(defun dired-get-size ()
+(defun ji/dired-get-size ()
   (interactive)
   (let ((files (dired-get-marked-files)))
     (with-temp-buffer
@@ -321,7 +321,7 @@
                  (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
                  (match-string 1))))))
 
-(defun jic/ediff-marked-pair ()
+(defun ji/ediff-marked-pair ()
   (interactive)
   (let* ((marked-files (dired-get-marked-files nil nil))
          (other-win (get-window-with-predicate
@@ -390,11 +390,11 @@ _t_   : toogle marks    _Z_   : compress/uncompress _M-s M-s_ : show total size
   (setq dired-recursive-deletes 'always)
   (setq dired-recursive-copies 'always)
   :bind (:map dired-mode-map
-	      ([remap beginning-of-buffer] . 'my-dired-jump-to-first-entry)
-	      ([remap end-of-buffer] . 'my-dired-jump-to-last-entry)
-	      ("M-RET" . 'dired-open-file-in-external-app)
-	      ("M-s M-s" . 'dired-get-size)
-	      ("=" . 'jic/ediff-marked-pair)
+	      ([remap beginning-of-buffer] . 'ji/dired-jump-to-first-entry)
+	      ([remap end-of-buffer] . 'ji/dired-jump-to-last-entry)
+	      ("M-RET" . 'ji/dired-open-file-in-external-app)
+	      ("M-s M-s" . 'ji/dired-get-size)
+	      ("=" . 'ji/ediff-marked-pair)
 	      ("?" . 'hydra-dired/body)))
 
 ;; Use dired-narrow
