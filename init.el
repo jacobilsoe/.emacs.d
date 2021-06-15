@@ -291,6 +291,12 @@
 (use-package org-present
   :after org)
 
+;;; multiple-cursors
+
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-c C-SPC" . mc/edit-lines)))
+
 ;;; dired
 
 ;; Ensure jumping to beginning and end of buffer stays within file list
