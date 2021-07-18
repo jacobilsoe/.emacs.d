@@ -378,7 +378,7 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 ("v" dired-view-file)
 ("M-s M-s" dired-get-size)
 ("o" dired-find-file-other-window)
-("=" jic/ediff-marked-pair)
+("=" ji/ediff-marked-pair)
 ("C-x C-q" dired-toggle-read-only)
 ("q" quit-window "quit" :color blue)
 ("?" nil :color blue))
