@@ -355,8 +355,8 @@ _u_   : unmark          _% R_     : rename/move regexp  _s_       : toggle sorti
 _U_   : unmark all      _D_       : delete              _v_       : view file
 _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total size
 ^ ^                     _c_       : compress to         _o_       : open in other window
-^ ^                     _=_       : ediff marked pair   ^ ^
-^ ^                     _C-x C-q_ : toggle read-only    ^ ^
+^ ^                     _=_       : ediff marked pair   _w_       : copy file name
+^ ^                     _C-x C-q_ : toggle read-only    _C-0 w_   : copy absolute file name
 "
 ("m" dired-mark)
 ("% m" dired-mark-files-regexp)
@@ -380,6 +380,8 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 ("o" dired-find-file-other-window)
 ("=" ji/ediff-marked-pair)
 ("C-x C-q" dired-toggle-read-only)
+("w" dired-copy-filename-as-kill)
+("C-0 w" (lambda () (interactive) (let ((current-prefix-arg 0)) (call-interactively #'dired-copy-filename-as-kill))))
 ("q" quit-window "quit" :color blue)
 ("?" nil :color blue))
 
