@@ -171,6 +171,10 @@
 
 (use-package dockerfile-mode)
 
+;;; terraform-mode
+
+(use-package terraform-mode)
+
 ;;; yaml-mode
 
 (use-package yaml-mode)
