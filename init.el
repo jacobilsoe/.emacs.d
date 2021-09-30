@@ -346,9 +346,9 @@
 
 (defhydra hydra-dired (:color pink :hint nil)
 "
-^Mark^                  ^Operate^                       ^View^
-^^^^^^----------------------------------------------------------------------------------
-_m_   : mark            _C_       : copy                _g_       : refresh
+^Mark^                  ^Operate^                       ^View^                              ^Search^
+^^^^^^^^-------------------------------------------------------------------------------------------------------
+_m_   : mark            _C_       : copy                _g_       : refresh                 _A_ : find in files
 _% m_ : mark regexp     _% C_     : copy regexp         _(_       : toggle details
 _% g_ : mark containing _R_       : rename/move         _C-n_     : narrow
 _u_   : unmark          _% R_     : rename/move regexp  _s_       : toggle sorting
@@ -382,6 +382,7 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 ("C-x C-q" dired-toggle-read-only)
 ("w" dired-copy-filename-as-kill)
 ("C-0 w" (lambda () (interactive) (let ((current-prefix-arg 0)) (call-interactively #'dired-copy-filename-as-kill))))
+("A" dired-do-find-regexp)
 ("q" quit-window "quit" :color blue)
 ("?" nil :color blue))
 
