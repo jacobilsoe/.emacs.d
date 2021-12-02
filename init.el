@@ -159,9 +159,18 @@
   (setq js-indent-level 2)
   (setq json-reformat:indent-width 2))
 
+;;; tree-sitter
+
+(use-package tree-sitter :ensure t)
+(use-package tree-sitter-indent :ensure t)
+(use-package tree-sitter-langs :ensure t)
+
 ;;; csharp-mode
 
-(use-package csharp-mode)
+(use-package csharp-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode)))
 
 ;;; markdown-mode
 
