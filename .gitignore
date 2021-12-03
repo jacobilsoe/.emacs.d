@@ -6,3 +6,5 @@
 /.last-package-update-day
 /transient
 /mirror-elpa
+/.cache
+/.lsp-session-v1
