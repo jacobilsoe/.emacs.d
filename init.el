@@ -172,6 +172,14 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode)))
 
+;;; lsp-mode
+
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (csharp-tree-sitter-mode . lsp)
+  :commands lsp)
+
 ;;; markdown-mode
 
 (use-package markdown-mode)
