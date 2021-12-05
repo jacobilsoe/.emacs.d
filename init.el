@@ -33,6 +33,7 @@
 (setq confirm-kill-emacs 'yes-or-no-p)
 (defalias 'list-buffers 'ibuffer)
 (winner-mode 1)
+(setq completion-ignore-case t)
 
 ;;; files
 
@@ -179,6 +180,32 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook (csharp-tree-sitter-mode . lsp)
   :commands lsp)
+
+(use-package lsp-ui
+  :custom
+  (lsp-ui-doc-enable nil)
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-sideline-enable nil)
+  :commands lsp-ui-mode)
+
+;;; company-mode
+
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind
+  (:map company-active-map
+        ("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+        ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode)
+  :config
+  (setq company-box-backends-colors '((company-capf :all "white" :selected (:background "grey" :foreground "white")))))
 
 ;;; markdown-mode
 
