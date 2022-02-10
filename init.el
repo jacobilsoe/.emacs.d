@@ -63,7 +63,8 @@
 
 ;;; mode-line
 
-(setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M" now))))
+(setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M:%S" now))))
+(setq display-time-interval 1)
 (display-time-mode)
 (column-number-mode)
 
