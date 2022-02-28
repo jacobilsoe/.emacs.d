@@ -216,6 +216,12 @@
 
 (use-package dockerfile-mode)
 
+;;; docker
+
+(use-package docker
+  :ensure t
+  :bind ("C-c d" . docker))
+
 ;;; terraform-mode
 
 (use-package terraform-mode)
