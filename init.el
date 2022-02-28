@@ -28,10 +28,10 @@
 (delete-selection-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "M-SPC") 'cycle-spacing)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq confirm-kill-emacs 'yes-or-no-p)
-(defalias 'list-buffers 'ibuffer)
 (winner-mode 1)
 (setq completion-ignore-case t)
 
