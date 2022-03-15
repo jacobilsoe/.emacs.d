@@ -53,7 +53,7 @@
 			   ("melpa" . "http://melpa.org/packages/"))))
 
 (package-initialize)
-(package-refresh-contents)
+(package-refresh-contents t)
 
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
