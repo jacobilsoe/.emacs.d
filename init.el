@@ -419,6 +419,16 @@
            (ediff-files (nth 0 marked-files) (nth 0 other-marked-files)))
           (t (error "Please mark exactly 2 files, at least one locally")))))
 
+(defun ji/dired-duplicate-this-file ()
+  (interactive)
+  (let* ((this  (dired-get-filename t))
+         (ctr   1)
+         (new   (format "%s[%d].%s" (file-name-sans-extension this) ctr (file-name-extension this))))
+    (while (file-exists-p new)
+      (setq ctr  (1+ ctr)
+            new  (format "%s[%d].%s" (file-name-sans-extension this) ctr (file-name-extension this))))
+    (dired-copy-file this new nil)))
+
 (defhydra hydra-dired (:color pink :hint nil)
 "
 ^Mark^                  ^Operate^                       ^View^                              ^Search^
@@ -432,6 +442,7 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 ^ ^                     _c_       : compress to         _o_       : open in other window
 ^ ^                     _=_       : ediff marked pair   _w_       : copy file name
 ^ ^                     _C-x C-q_ : toggle read-only    _C-0 w_   : copy absolute file name
+^ ^                     _M-s M-c_ : duplicate file
 "
 ("m" dired-mark)
 ("% m" dired-mark-files-regexp)
@@ -458,6 +469,7 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 ("w" dired-copy-filename-as-kill)
 ("C-0 w" (lambda () (interactive) (let ((current-prefix-arg 0)) (call-interactively #'dired-copy-filename-as-kill))))
 ("M-s M-d" find-name-dired)
+("M-s M-c" ji/dired-duplicate-this-file)
 ("A" dired-do-find-regexp)
 ("q" quit-window "quit" :color blue)
 ("?" nil :color blue))
@@ -482,6 +494,7 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 	      ("M-RET" . 'ji/dired-open-file-in-external-app)
 	      ("M-s M-s" . 'ji/dired-get-size)
 	      ("M-s M-d" . 'find-name-dired)
+	      ("M-s M-c" . 'ji/dired-duplicate-this-file)
 	      ("=" . 'ji/ediff-marked-pair)
 	      ("?" . 'hydra-dired/body)))
 
