@@ -4,7 +4,7 @@
 
 ;;; visuals
 
-(set-face-attribute 'default nil :height 105 :family "InputMono")
+(set-face-attribute 'default nil :height 115 :family "InputMono")
 (load-theme 'wombat t)
 (tool-bar-mode 0)
 (setq inhibit-splash-screen t)
