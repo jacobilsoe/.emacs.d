@@ -332,6 +332,11 @@
    '((emacs-lisp . t) (shell . t)))
   (setq org-file-apps-gnu (append '((t . "setsid -w xdg-open %s")) org-file-apps-gnu)))
 
+;;; valign
+
+(use-package valign
+  :hook (org-mode . valign-mode))
+
 ;;; hydra
 
 (use-package hydra)
