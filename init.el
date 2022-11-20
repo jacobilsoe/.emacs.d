@@ -376,6 +376,13 @@
   :ensure t
   :bind (("C-c C-SPC" . mc/edit-lines)))
 
+;;; helpful
+
+(use-package helpful)
+(global-set-key (kbd "C-h f") #'helpful-callable)
+(global-set-key (kbd "C-h v") #'helpful-variable)
+(global-set-key (kbd "C-h k") #'helpful-key)
+
 ;;; dired
 
 ;; Ensure jumping to beginning and end of buffer stays within file list
