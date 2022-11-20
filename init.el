@@ -383,6 +383,12 @@
 (global-set-key (kbd "C-h v") #'helpful-variable)
 (global-set-key (kbd "C-h k") #'helpful-key)
 
+;;; which-key
+
+(use-package which-key
+  :config
+  (which-key-mode))
+
 ;;; dired
 
 ;; Ensure jumping to beginning and end of buffer stays within file list
