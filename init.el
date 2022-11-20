@@ -88,7 +88,7 @@
 
 ;;; nxml-mode
 
-(add-to-list 'auto-mode-alist '("\\.\\(xslt\\|targets\\)\\'" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(xslt\\|targets\\|csproj\\)\\'" . nxml-mode))
 
 ;;; magit
 
