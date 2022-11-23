@@ -451,7 +451,7 @@
 ^Mark^                  ^Operate^                       ^View^                              ^Search^
 ^^^^^^^^-------------------------------------------------------------------------------------------------------------
 _m_   : mark            _C_       : copy                _g_       : refresh                 _M-s M-d_ : find files
-_% m_ : mark regexp     _% C_     : copy regexp         _(_       : toggle details          _A_       : find in files
+_% m_ : mark regexp     _% C_     : copy regexp         _C-0 s_   : refresh using switches  _A_       : find in files
 _% g_ : mark containing _R_       : rename/move         _C-n_     : narrow
 _u_   : unmark          _% R_     : rename/move regexp  _s_       : toggle sorting
 _U_   : unmark all      _D_       : delete              _v_       : view file
@@ -459,7 +459,7 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 ^ ^                     _c_       : compress to         _o_       : open in other window
 ^ ^                     _=_       : ediff marked pair   _w_       : copy file name
 ^ ^                     _C-x C-q_ : toggle read-only    _C-0 w_   : copy absolute file name
-^ ^                     _M-s M-c_ : duplicate file
+^ ^                     _M-s M-c_ : duplicate file      _(_       : toggle details
 "
 ("m" dired-mark)
 ("% m" dired-mark-files-regexp)
@@ -475,7 +475,7 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 ("Z" dired-do-compress)
 ("c" dired-do-compress-to)
 ("g" revert-buffer)
-("(" dired-hide-details-mode)
+("C-0 s" (lambda () (interactive) (let ((current-prefix-arg 0)) (call-interactively #'dired-sort-toggle-or-edit))))
 ("C-n" dired-narrow)
 ("s" dired-sort-toggle-or-edit)
 ("v" dired-view-file)
@@ -485,6 +485,7 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 ("C-x C-q" dired-toggle-read-only)
 ("w" dired-copy-filename-as-kill)
 ("C-0 w" (lambda () (interactive) (let ((current-prefix-arg 0)) (call-interactively #'dired-copy-filename-as-kill))))
+("(" dired-hide-details-mode)
 ("M-s M-d" find-name-dired)
 ("M-s M-c" ji/dired-duplicate-this-file)
 ("A" dired-do-find-regexp)
