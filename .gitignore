@@ -4,7 +4,7 @@
 /server
 /url
 /.last-package-update-day
-/transient
+/transient/history.el
 /mirror-elpa
 /.cache
 /.lsp-session-v1
