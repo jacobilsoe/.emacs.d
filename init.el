@@ -413,8 +413,9 @@
   (interactive)
   (let ((files (dired-get-marked-files)))
     (with-temp-buffer
-      (apply 'call-process "du" nil t nil "-sch" files)
-      (message "Total size: %s"
+      (apply 'call-process "du" nil t nil "-ach" files)
+      (message "Number of files and directories: %s Total size: %s"
+	       (- (count-lines (point-min) (point-max)) 1)
                (progn
                  (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
                  (match-string 1))))))
@@ -449,13 +450,13 @@
 (defhydra hydra-dired (:color pink :hint nil)
 "
 ^Mark^                  ^Operate^                       ^View^                              ^Search^
-^^^^^^^^-------------------------------------------------------------------------------------------------------------
-_m_   : mark            _C_       : copy                _g_       : refresh                 _M-s M-d_ : find files
-_% m_ : mark regexp     _% C_     : copy regexp         _C-0 s_   : refresh using switches  _A_       : find in files
+^^^^^^^^---------------------------------------------------------------------------------------------------------------
+_m_   : mark            _C_       : copy                _g_       : refresh                   _M-s M-d_ : find files
+_% m_ : mark regexp     _% C_     : copy regexp         _C-0 s_   : refresh using switches    _A_       : find in files
 _% g_ : mark containing _R_       : rename/move         _C-n_     : narrow
 _u_   : unmark          _% R_     : rename/move regexp  _s_       : toggle sorting
 _U_   : unmark all      _D_       : delete              _v_       : view file
-_t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total size
+_t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total size and count
 ^ ^                     _c_       : compress to         _o_       : open in other window
 ^ ^                     _=_       : ediff marked pair   _w_       : copy file name
 ^ ^                     _C-x C-q_ : toggle read-only    _C-0 w_   : copy absolute file name
