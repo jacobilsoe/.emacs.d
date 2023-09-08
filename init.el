@@ -133,6 +133,13 @@
   :mode "\\.puml\\'"
   :bind (:map plantuml-mode-map ("C-c C-c" . (lambda () (interactive) (plantuml-preview 4)))))
 
+;;; rg
+
+(use-package rg
+  :config
+  (rg-enable-default-bindings)
+  (rg-enable-menu))
+
 ;;; avy
 
 (use-package avy
