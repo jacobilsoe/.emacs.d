@@ -88,7 +88,16 @@
 
 ;;; nxml-mode
 
-(add-to-list 'auto-mode-alist '("\\.\\(xslt\\|targets\\|csproj\\)\\'" . nxml-mode))
+(use-package nxml-mode
+  :ensure nil
+  :no-require t
+  :defer t
+  :init
+  :mode ("\\.\\(xslt\\|targets\\|csproj\\)\\'" . nxml-mode)
+  :config
+  (setq nxml-child-indent 4)
+  (setq nxml-attribute-indent 4)
+  (setq-default indent-tabs-mode nil))
 
 ;;; magit
 
