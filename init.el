@@ -93,7 +93,7 @@
   :no-require t
   :defer t
   :init
-  :mode ("\\.\\(xslt\\|targets\\|csproj\\)\\'" . nxml-mode)
+  :mode ("\\.\\(xslt\\|targets\\|csproj\\|props\\)\\'" . nxml-mode)
   :config
   (setq nxml-child-indent 4)
   (setq nxml-attribute-indent 4)
