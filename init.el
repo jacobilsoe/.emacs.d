@@ -101,15 +101,20 @@
 
 ;;; magit
 
+(defun ji/magit-status ()
+  (interactive)
+  (delete-other-windows)
+  (let ((window-width (window-total-width)))
+    (magit-status)
+    (enlarge-window-horizontally (/ window-width 6))))
+
 (use-package magit
   :bind
-  ("C-x g" . magit-status)
+  ("C-x g" . ji/magit-status)
   :config
   (add-hook 'git-commit-setup-hook 'turn-off-auto-fill t)
   (setq magit-push-always-verify nil)
-  (setq magit-diff-refine-hunk 'all)
-  (use-package fullframe)
-  (fullframe magit-status magit-mode-quit-window))
+  (setq magit-diff-refine-hunk 'all))
 
 ;;; ediff
 
