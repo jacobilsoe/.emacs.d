@@ -1,3 +1,5 @@
+;;; -*- lexical-binding:t -*-
+
 ;;; general
 
 (server-start)
@@ -76,6 +78,16 @@
   :init (doom-modeline-mode 1)
   :custom
   (doom-modeline-minor-modes t))
+
+;;; notifications
+
+(defun ji/windows-alert (message)
+  (let ((id (w32-notification-notify :title "Info" :body message :level 'info)))
+    (run-with-timer 1 nil (lambda nil (w32-notification-close id)))))
+
+(defun ji/schedule-break ()
+  (interactive)
+  (run-at-time "20 min" nil 'ji/windows-alert "Take a break"))
 
 ;;; proced
 
