@@ -39,6 +39,9 @@
 (winner-mode 1)
 (setq completion-ignore-case t)
 
+;; use standard C locale for formatting time values
+(setq system-time-locale "C")
+
 ;;; files
 
 (setq make-backup-files nil)
