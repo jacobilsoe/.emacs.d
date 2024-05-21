@@ -348,6 +348,7 @@
 (use-package org
   :bind
   ("C-c a" . org-agenda)
+  ("C-c c" . org-capture)
   :config
   (setq org-agenda-files '("~/Dropbox/Documents"))
   (setq org-tags-column 0)
