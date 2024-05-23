@@ -485,7 +485,7 @@
 
 (defhydra hydra-dired (:color pink :hint nil)
 "
-^Mark^                  ^Operate^                       ^View^                              ^Search^
+^Mark^                  ^Operate^                       ^View^                                ^Search^
 ^^^^^^^^---------------------------------------------------------------------------------------------------------------
 _m_   : mark            _C_       : copy                _g_       : refresh                   _M-s M-d_ : find files
 _% m_ : mark regexp     _% C_     : copy regexp         _C-0 s_   : refresh using switches    _A_       : find in files
