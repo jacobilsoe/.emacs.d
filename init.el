@@ -351,6 +351,7 @@
   ("C-c c" . org-capture)
   :config
   (setq org-agenda-files '("~/Dropbox/Documents"))
+  (setq org-default-notes-file "~/Dropbox/Documents/tasks.org")
   (setq org-tags-column 0)
   (setq org-src-window-setup 'current-window)
   (setq org-confirm-shell-link-function nil)
