@@ -362,7 +362,7 @@
   (setq org-startup-folded t)
   (setq org-image-actual-width nil)
   (add-to-list 'org-modules 'org-habit)
-  (setq org-capture-templates '(("t" "Task" entry (file org-default-notes-file) "* TODO %?\n  %u")))
+  (setq org-capture-templates '(("t" "Task" entry (file org-default-notes-file) "* TODO %?\n  :PROPERTIES:\n  :CAPTURED: %U\n  :END:")))
   (plist-put org-calc-default-modes 'calc-float-format '(float 12))
   (org-babel-do-load-languages
    'org-babel-load-languages
