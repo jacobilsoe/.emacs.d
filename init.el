@@ -369,6 +369,12 @@
    '((emacs-lisp . t) (shell . t)))
   (setq org-file-apps-gnu (append '((t . "setsid -w xdg-open %s")) org-file-apps-gnu)))
 
+;;; org-habit-stats
+
+(use-package org-habit-stats
+  :config
+  (add-hook 'org-agenda-mode-hook (lambda () (local-set-key (kbd "h") 'org-habit-stats-view-habit-at-point-agenda))))
+
 ;;; valign
 
 (use-package valign
