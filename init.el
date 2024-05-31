@@ -565,3 +565,17 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 (use-package dired-narrow
   :after dired
   :bind (:map dired-mode-map ("C-n" . dired-narrow)))
+
+;;; hydra to show help for seldomly used commands
+
+(defhydra hydra-help (:color pink :hint nil)
+"
+^Mark^                  ^Operate^                       ^View^                                ^Search^
+^^^^^^^^---------------------------------------------------------------------------------------------------------------
+^ ^                     _C-x TAB_ : indent-rigidly      ^ ^                                   _M-s o_ : occur
+"
+("C-x TAB" indent-rigedly)
+("M-s o" occur)
+("q" nil :color blue))
+
+(global-set-key (kbd "C-c h") 'hydra-help/body)
