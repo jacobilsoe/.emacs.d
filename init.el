@@ -9,7 +9,7 @@
 (let ((height (if (eq system-type 'windows-nt) 115 173)))
   (set-face-attribute 'default nil :height height :family "InputMono"))
 
-(load-theme 'wombat t)
+(load-theme 'modus-vivendi t)
 (tool-bar-mode 0)
 (setq inhibit-splash-screen t)
 
