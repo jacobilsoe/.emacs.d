@@ -38,7 +38,9 @@
 (setq confirm-kill-emacs 'yes-or-no-p)
 (winner-mode 1)
 (setq completion-ignore-case t)
-
+(defun always-yes (&rest args)
+  (cl-letf (((symbol-function 'y-or-n-p) #'always))
+    (funcall-interactively (car args) (cdr args))))
 ;; use standard C locale for formatting time values
 (setq system-time-locale "C")
 
@@ -135,7 +137,16 @@
 
 ;;; ediff
 
+(defun ji/ediff-quit-unconditionally ()
+  (interactive)
+  (always-yes #'ediff-quit))
+
+(defun ji/add-q-to-ediff-mode-map ()
+  (define-key ediff-mode-map "q" 'ji/ediff-quit-unconditionally))
+
 (use-package ediff
+  :init
+  (add-hook 'ediff-keymap-setup-hook 'ji/add-q-to-ediff-mode-map)
   :bind
   ("M-<down>" . ediff-next-difference)
   ("M-<up>" . ediff-previous-difference)
