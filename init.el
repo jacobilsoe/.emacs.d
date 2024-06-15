@@ -125,6 +125,11 @@
   (global-dash-fontify-mode)
   (dash-register-info-lookup))
 
+;;; elisp-def
+
+(use-package elisp-def
+  :hook (emacs-lisp-mode . elisp-def-mode))
+
 ;;; magit
 
 (defun ji/magit-status ()
