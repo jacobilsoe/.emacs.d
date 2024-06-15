@@ -120,7 +120,10 @@
 
 ;;; dash
 
-(use-package dash)
+(use-package dash
+  :config
+  (global-dash-fontify-mode)
+  (dash-register-info-lookup))
 
 ;;; magit
 
