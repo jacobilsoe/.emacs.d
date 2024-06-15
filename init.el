@@ -118,6 +118,10 @@
   (setq nxml-attribute-indent 4)
   (setq-default indent-tabs-mode nil))
 
+;;; dash
+
+(use-package dash)
+
 ;;; magit
 
 (defun ji/magit-status ()
