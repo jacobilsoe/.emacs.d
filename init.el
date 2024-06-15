@@ -137,6 +137,24 @@
 
 ;;; ediff
 
+;; restore previous window configuration when quitting ediff
+
+(defvar ji/ediff-previous-window-configuration)
+
+(defun ji/ediff-restore-window-configuration ()
+  (set-window-configuration ji/ediff-previous-window-configuration)
+  (remove-hook 'ediff-after-quit-hook-internal 'ji/ediff-restore-window-configuration))
+
+(defun ji/ediff-restore-window-configuration-advice (orig-fun &rest args)
+  (setq ji/ediff-previous-window-configuration (current-window-configuration))
+  (add-hook 'ediff-after-quit-hook-internal 'ji/ediff-restore-window-configuration)
+  (apply orig-fun args))
+
+(dolist (command '(ediff ediff-files ediff-buffers))
+  (advice-add command :around #'ji/ediff-restore-window-configuration-advice))
+
+;; quit ediff without asking for confirmation
+
 (defun ji/ediff-quit-unconditionally ()
   (interactive)
   (always-yes #'ediff-quit))
