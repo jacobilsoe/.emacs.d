@@ -606,11 +606,13 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 
 (defhydra hydra-help (:color pink :hint nil)
 "
-^Mark^                  ^Operate^                       ^View^                                ^Search^
-^^^^^^^^---------------------------------------------------------------------------------------------------------------
-^ ^                     _C-x TAB_ : indent-rigidly      ^ ^                                   _M-s o_ : occur
+^Mark^                  ^Operate^                                      ^View^                      ^Search^
+^^^^^^^^----------------------------------------------------------------------------------------------------------
+^ ^                     _C-x TAB_   : indent-rigidly                   ^ ^                         _M-s o_ : occur
+^ ^                     _C-x RET c_ : universal-coding-system-argument
 "
 ("C-x TAB" indent-rigedly)
+("C-x RET c" universal-coding-system-argument)
 ("M-s o" occur)
 ("q" nil :color blue))
 
