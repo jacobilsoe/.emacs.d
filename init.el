@@ -43,6 +43,7 @@
     (funcall-interactively (car args) (cdr args))))
 ;; use standard C locale for formatting time values
 (setq system-time-locale "C")
+(setq bookmark-default-file "~/Dropbox/Documents/bookmarks")
 
 ;;; files
 
