@@ -45,6 +45,15 @@
 (setq system-time-locale "C")
 (setq bookmark-default-file "~/Dropbox/Documents/bookmarks")
 
+(defun generate-uuid-guid ()
+  (interactive)
+  (let ((command
+	 (cond
+	  ((eq system-type 'windows-nt) "powershell.exe -Command [guid]::NewGuid().toString()")
+	  ((eq system-type 'gnu/linux) "uuidgen"))))
+    (kill-new (string-trim (shell-command-to-string command)))
+    (message "UUID/GUID %s copied to kill ring" (car kill-ring))))
+
 ;;; files
 
 (setq make-backup-files nil)
