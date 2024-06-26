@@ -339,20 +339,27 @@
   (require 'whole-line-or-region)
   (whole-line-or-region-global-mode t))
 
-;;; swiper
+;;; vertico
 
-(defun ji/swiper ()
-  (interactive)
-  (if (> (buffer-size) 1000000)
-      (isearch-forward)
-    (swiper)))
+(use-package vertico
+  :init
+  (vertico-mode))
 
-(use-package swiper
-  :demand
+;;; marginalia
+
+(use-package marginalia
   :bind
-  ("C-s" . ji/swiper)
-  :config
-  (ivy-mode))
+  (:map minibuffer-local-map ("M-A" . marginalia-cycle))
+  :init
+  (marginalia-mode))
+
+;;; orderless
+
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
 
 ;;; auto-package-update
 
