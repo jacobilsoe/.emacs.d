@@ -142,15 +142,15 @@
 
 ;;; magit
 
-(defun ji/magit-status-advice (orig-fun &rest args)
-  (delete-other-windows)
-  (let ((window-width (window-total-width)))
-    (apply orig-fun args)
-    (enlarge-window-horizontally (/ window-width 6))))
-
 (use-package magit
   :bind
   ("C-x g" . magit-status)
+  :init
+  (defun ji/magit-status-advice (orig-fun &rest args)
+    (delete-other-windows)
+    (let ((window-width (window-total-width)))
+      (apply orig-fun args)
+      (enlarge-window-horizontally (/ window-width 6))))
   :config
   (advice-add 'magit-status :around #'ji/magit-status-advice)
   (add-hook 'git-commit-setup-hook 'turn-off-auto-fill t)
