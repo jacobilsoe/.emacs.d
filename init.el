@@ -365,8 +365,11 @@
 
 (use-package consult
   :bind
+  ("C-x b" . consult-buffer)
+  ("C-x 4 b" . consult-buffer-other-window)
+  ("C-x 5 b" . consult-buffer-other-frame)
+  ("C-x t b" . consult-buffer-other-tab)
   ("M-y" . consult-yank-pop))
-
 
 ;;; auto-package-update
 
