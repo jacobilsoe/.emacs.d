@@ -361,6 +361,13 @@
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
 
+;;; consult
+
+(use-package consult
+  :bind
+  ("M-y" . consult-yank-pop))
+
+
 ;;; auto-package-update
 
 (use-package auto-package-update
