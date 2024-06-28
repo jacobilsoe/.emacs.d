@@ -343,7 +343,9 @@
 
 (use-package vertico
   :init
-  (vertico-mode))
+  (vertico-mode)
+  :custom
+  (vertico-cycle t))
 
 ;;; marginalia
 
