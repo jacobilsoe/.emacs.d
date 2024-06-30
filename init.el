@@ -410,6 +410,11 @@
 (use-package all-the-icons-ibuffer
   :ensure t
   :init (all-the-icons-ibuffer-mode 1))
+(use-package all-the-icons-completion
+  :init
+  (all-the-icons-completion-mode)
+  :hook
+  (marginalia-mode . all-the-icons-completion-marginalia-setup))
 
 (setq inhibit-compacting-font-caches t)
 
