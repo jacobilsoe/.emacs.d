@@ -240,6 +240,11 @@
   :bind
   ("M-o" . ace-window))
 
+;;; paredit
+
+(use-package paredit
+  :hook (emacs-lisp-mode . enable-paredit-mode))
+
 ;;; scala-mode
 
 (use-package scala-mode
