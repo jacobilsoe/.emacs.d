@@ -493,14 +493,16 @@
 
 (use-package multiple-cursors
   :ensure t
-  :bind (("C-c C-SPC" . mc/edit-lines)))
+  :bind
+  ("C-c C-SPC" . mc/edit-lines))
 
 ;;; helpful
 
-(use-package helpful)
-(global-set-key (kbd "C-h f") #'helpful-callable)
-(global-set-key (kbd "C-h v") #'helpful-variable)
-(global-set-key (kbd "C-h k") #'helpful-key)
+(use-package helpful
+  :bind
+  ("C-h f" . helpful-callable)
+  ("C-h v" . helpful-variable)
+  ("C-h k" . helpful-key))
 
 ;;; which-key
 
