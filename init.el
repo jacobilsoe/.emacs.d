@@ -153,7 +153,6 @@
       (enlarge-window-horizontally (/ window-width 6))))
   :config
   (advice-add 'magit-status :around #'ji/magit-status-advice)
-  (add-hook 'git-commit-setup-hook 'turn-off-auto-fill t)
   (setq magit-push-always-verify nil)
   (setq magit-diff-refine-hunk 'all))
 
