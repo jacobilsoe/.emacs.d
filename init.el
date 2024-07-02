@@ -135,6 +135,10 @@
   (global-dash-fontify-mode)
   (dash-register-info-lookup))
 
+;;; s
+
+(use-package s)
+
 ;;; elisp-def
 
 (use-package elisp-def
