@@ -54,6 +54,11 @@
     (kill-new (string-trim (shell-command-to-string command)))
     (message "UUID/GUID %s copied to kill ring" (car kill-ring))))
 
+;;; scratch buffer
+
+(setq initial-major-mode 'fundamental-mode
+      initial-scratch-message nil)
+
 ;;; files
 
 (setq make-backup-files nil)
