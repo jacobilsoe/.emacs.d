@@ -85,6 +85,7 @@
 (require 'use-package-ensure)
 
 (setq use-package-always-ensure t
+      use-package-verbose t
       use-package-compute-statistics t
       use-package-minimum-reported-time 0.0001)
 
