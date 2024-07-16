@@ -83,7 +83,10 @@
   (package-install 'use-package))
 
 (require 'use-package-ensure)
-(setq use-package-always-ensure t)
+
+(setq use-package-always-ensure t
+      use-package-compute-statistics t
+      use-package-minimum-reported-time 0.0001)
 
 ;;; mode-line
 
