@@ -100,7 +100,6 @@
   :hook (doom-modeline-mode . minions-mode))
 
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1)
   :custom
   (doom-modeline-minor-modes t))
@@ -272,9 +271,9 @@
 
 ;;; tree-sitter
 
-(use-package tree-sitter :ensure t)
-(use-package tree-sitter-indent :ensure t)
-(use-package tree-sitter-langs :ensure t)
+(use-package tree-sitter)
+(use-package tree-sitter-indent)
+(use-package tree-sitter-langs)
 
 ;;; lsp-mode
 
@@ -321,7 +320,6 @@
 ;;; docker
 
 (use-package docker
-  :ensure t
   :bind ("C-c d" . docker))
 
 ;;; terraform-mode
@@ -436,7 +434,6 @@
   :hook
   (dired-mode . all-the-icons-dired-mode))
 (use-package all-the-icons-ibuffer
-  :ensure t
   :init (all-the-icons-ibuffer-mode 1))
 (use-package all-the-icons-completion
   :init
@@ -520,7 +517,6 @@
 ;;; multiple-cursors
 
 (use-package multiple-cursors
-  :ensure t
   :bind
   ("C-c C-SPC" . mc/edit-lines))
 
