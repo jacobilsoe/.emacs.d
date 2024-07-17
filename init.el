@@ -97,7 +97,7 @@
 (column-number-mode)
 
 (use-package minions
-  :hook (doom-modeline-mode . minions-mode))
+  :hook (doom-modeline-mode))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -150,7 +150,7 @@
 ;;; elisp-def
 
 (use-package elisp-def
-  :hook (emacs-lisp-mode . elisp-def-mode))
+  :hook (emacs-lisp-mode))
 
 ;;; magit
 
@@ -294,7 +294,7 @@
 
 (use-package company
   :after lsp-mode
-  :hook (lsp-mode . company-mode)
+  :hook (lsp-mode)
   :bind
   (:map company-active-map
         ("<tab>" . company-complete-selection))
@@ -305,7 +305,7 @@
   (company-idle-delay 0.0))
 
 (use-package company-box
-  :hook (company-mode . company-box-mode)
+  :hook (company-mode-box)
   :config
   (setq company-box-backends-colors '((company-capf :all "white" :selected (:background "grey" :foreground "white")))))
 
@@ -432,7 +432,7 @@
   :config
   (setq all-the-icons-dired-monochrome nil)
   :hook
-  (dired-mode . all-the-icons-dired-mode))
+  (dired-mode))
 (use-package all-the-icons-ibuffer
   :init (all-the-icons-ibuffer-mode 1))
 (use-package all-the-icons-completion
@@ -478,7 +478,7 @@
 ;;; valign
 
 (use-package valign
-  :hook (org-mode . valign-mode))
+  :hook (org-mode))
 
 ;;; hydra
 
@@ -488,7 +488,7 @@
 
 (use-package org-superstar
   :after org
-  :hook (org-mode . org-superstar-mode))
+  :hook (org-mode))
 
 ;;; org-present
 
