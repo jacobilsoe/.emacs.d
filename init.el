@@ -26,7 +26,7 @@
     (set-face-attribute 'default nil :height height :family "InputMono"))
   (load-theme 'modus-vivendi t)
   (tool-bar-mode 0)
-  (setq inhibit-splash-screen t)
+
   (column-number-mode)
 
   ;; pulse current line
@@ -42,12 +42,7 @@
 
   ;; editing
   (delete-selection-mode)
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (global-set-key (kbd "C-x k") 'kill-this-buffer)
-  (global-set-key (kbd "C-x C-b") 'ibuffer)
-  (global-set-key (kbd "M-SPC") 'cycle-spacing)
   (fset 'yes-or-no-p 'y-or-n-p)
-  (setq confirm-kill-emacs 'yes-or-no-p)
   (winner-mode 1)
   (setq completion-ignore-case t)
   (defun always-yes (&rest args)
@@ -68,13 +63,11 @@
       (kill-new (string-trim (shell-command-to-string command)))
       (message "UUID/GUID %s copied to kill ring" (car kill-ring))))
 
-  ;; scratch buffer
+  ;; startup
   (setq initial-major-mode 'fundamental-mode
-	initial-scratch-message nil)
+	initial-scratch-message nil
+	inhibit-splash-screen t)
 
-  ;; files
-  (setq make-backup-files nil)
-  (setq large-file-warning-threshold nil)
   (setq create-lockfiles nil)
   (prefer-coding-system 'utf-8)
 
@@ -100,8 +93,19 @@
     ("C-x RET c" universal-coding-system-argument)
     ("M-s o" occur)
     ("q" nil :color blue))
+  :bind
+  ("C-x k" . kill-this-buffer)
+  ("C-x C-b" . ibuffer)
+  ("M-SPC" . cycle-spacing)
+  ("C-c h" . hydra-help/body))
 
-  (global-set-key (kbd "C-c h") 'hydra-help/body))
+(use-package files
+  :ensure nil
+  :init
+  (setq make-backup-files nil
+	large-file-warning-threshold nil
+	confirm-kill-emacs 'yes-or-no-p)
+  :hook (before-save . delete-trailing-whitespace))
 
 (use-package paren
   :ensure nil
