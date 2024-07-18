@@ -27,6 +27,7 @@
   (load-theme 'modus-vivendi t)
   (tool-bar-mode 0)
   (setq inhibit-splash-screen t)
+  (column-number-mode)
 
   ;; pulse current line
   (defun ji/pulse-line (&rest _)
@@ -82,12 +83,6 @@
   (setq create-lockfiles nil)
   (prefer-coding-system 'utf-8)
 
-  ;; mode-line
-  (setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M:%S" now))))
-  (setq display-time-interval 1)
-  (display-time-mode)
-  (column-number-mode)
-
   ;; notifications
 
   (defun ji/windows-alert (message)
@@ -112,6 +107,14 @@
     ("q" nil :color blue))
 
   (global-set-key (kbd "C-c h") 'hydra-help/body))
+
+(use-package time
+  :ensure nil
+  :init
+  (setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M:%S" now)))
+        display-time-interval 1)
+  :config
+  (display-time))
 
 (use-package minions
   :hook (doom-modeline-mode))
