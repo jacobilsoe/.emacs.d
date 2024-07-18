@@ -21,25 +21,14 @@
 
 (use-package emacs
   :init
-  ;; visuals
   (let ((height (if (eq system-type 'windows-nt) 115 173)))
     (set-face-attribute 'default nil :height height :family "InputMono"))
   (load-theme 'modus-vivendi t)
   (tool-bar-mode 0)
   (column-number-mode)
 
-  ;; pulse current line
-  (defun ji/pulse-line (&rest _)
-    (pulse-momentary-highlight-one-line (point)))
-  (dolist (command '(recenter-top-bottom other-window ace-window))
-    (advice-add command :after #'ji/pulse-line))
-
-  ;; performance
   (setq inhibit-compacting-font-caches t)
-
   (setq w32-grab-focus-on-raise nil)
-
-  ;; editing
   (delete-selection-mode)
   (fset 'yes-or-no-p 'y-or-n-p)
   (setq completion-ignore-case t)
@@ -48,18 +37,8 @@
       (funcall-interactively (car args) (cdr args))))
   (add-hook 'prog-mode-hook #'hs-minor-mode)
 
-  ;; use standard C locale for formatting time values
   (setq system-time-locale "C")
   (setq bookmark-default-file "~/Dropbox/Documents/bookmarks")
-
-  (defun generate-uuid-guid ()
-    (interactive)
-    (let ((command
-	   (cond
-	    ((eq system-type 'windows-nt) "powershell.exe -Command [guid]::NewGuid().toString()")
-	    ((eq system-type 'gnu/linux) "uuidgen"))))
-      (kill-new (string-trim (shell-command-to-string command)))
-      (message "UUID/GUID %s copied to kill ring" (car kill-ring))))
 
   ;; startup
   (setq initial-major-mode 'fundamental-mode
@@ -69,8 +48,13 @@
   (setq create-lockfiles nil)
   (prefer-coding-system 'utf-8)
 
-  ;; notifications
+  ;; pulse current line
+  (defun ji/pulse-line (&rest _)
+    (pulse-momentary-highlight-one-line (point)))
+  (dolist (command '(recenter-top-bottom other-window ace-window))
+    (advice-add command :after #'ji/pulse-line))
 
+  ;; functions
   (defun ji/windows-alert (message)
     (let ((id (w32-notification-notify :title "Info" :body message :level 'info)))
       (run-with-timer 1 nil (lambda nil (w32-notification-close id)))))
@@ -78,6 +62,15 @@
   (defun ji/schedule-break ()
     (interactive)
     (run-at-time "20 min" nil 'ji/windows-alert "Take a break"))
+
+  (defun ji/generate-uuid-guid ()
+    (interactive)
+    (let ((command
+	   (cond
+	    ((eq system-type 'windows-nt) "powershell.exe -Command [guid]::NewGuid().toString()")
+	    ((eq system-type 'gnu/linux) "uuidgen"))))
+      (kill-new (string-trim (shell-command-to-string command)))
+      (message "UUID/GUID %s copied to kill ring" (car kill-ring))))
 
   ;; hydra to show help for seldomly used commands
   (defhydra hydra-help (:color pink :hint nil)
