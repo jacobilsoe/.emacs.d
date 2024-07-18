@@ -108,14 +108,12 @@
   (interactive)
   (run-at-time "20 min" nil 'ji/windows-alert "Take a break"))
 
-;;; proced
-
-(defun ji/proced-settings ()
-  (proced-toggle-auto-update t)
-  (setq proced-auto-update-interval 1)
-  (setq proced-format 'medium)
-  )
-(add-hook 'proced-mode-hook 'ji/proced-settings)
+(use-package proced
+  :custom
+  ((proced-tree-flag t)
+   (proced-auto-update-flag t)
+   (proced-format 'medium)
+   (proced-auto-update-interval 1)))
 
 (use-package nxml-mode
   :ensure nil
