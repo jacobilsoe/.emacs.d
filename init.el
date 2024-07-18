@@ -79,9 +79,6 @@
 (package-initialize)
 (package-refresh-contents t)
 
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
 (setq use-package-always-ensure t
       use-package-verbose t
       use-package-compute-statistics t
