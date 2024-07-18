@@ -349,7 +349,6 @@
 
 (use-package whole-line-or-region
   :init
-  (require 'whole-line-or-region)
   (whole-line-or-region-global-mode t))
 
 ;;; vertico
