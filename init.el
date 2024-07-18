@@ -117,8 +117,6 @@
   )
 (add-hook 'proced-mode-hook 'ji/proced-settings)
 
-;;; nxml-mode
-
 (use-package nxml-mode
   :ensure nil
   :no-require t
@@ -130,23 +128,15 @@
   (setq nxml-attribute-indent 4)
   (setq-default indent-tabs-mode nil))
 
-;;; dash
-
 (use-package dash
   :config
   (global-dash-fontify-mode)
   (dash-register-info-lookup))
 
-;;; s
-
 (use-package s)
-
-;;; elisp-def
 
 (use-package elisp-def
   :hook (emacs-lisp-mode))
-
-;;; magit
 
 (use-package magit
   :bind
@@ -204,17 +194,11 @@
   (ediff-current-diff-B ((t (:extend t :background "#335533" :foreground "white"))))
   (ediff-current-diff-C ((t (:extend t :background "#888833" :foreground "white")))))
 
-;;; logview
-
 (use-package logview
   :config
   (setq logview-additional-submodes '(("SLF4J-1" (format . "TIMESTAMP LEVEL [NAME] (THREAD)") (levels . "SLF4J"))("LOG4NET-1" (format . "TIMESTAMP [THREAD] LEVEL NAME (IGNORED)") (levels . "SLF4J")))))
 
-;;; powershell
-
 (use-package powershell)
-
-;;; planuml-mode
 
 (use-package plantuml-mode
   :mode "\\.puml\\'"
@@ -224,14 +208,10 @@
 
 (setq calc-algebraic-mode t)
 
-;;; rg
-
 (use-package rg
   :config
   (rg-enable-default-bindings)
   (rg-enable-menu))
-
-;;; avy
 
 (use-package avy
   :bind
@@ -239,37 +219,27 @@
   :config
   (setq avy-timeout-seconds 0.3))
 
-;;; ace-window
-
 (use-package ace-window
   :bind
   ("M-o" . ace-window))
 
-;;; paredit
-
 (use-package paredit
   :hook (emacs-lisp-mode . enable-paredit-mode))
-
-;;; scala-mode
 
 (use-package scala-mode
   :interpreter
   ("scala" . scala-mode))
-
-;;; json-mode
 
 (use-package json-mode
   :config
   (setq js-indent-level 2)
   (setq json-reformat:indent-width 2))
 
-;;; tree-sitter
-
 (use-package tree-sitter)
-(use-package tree-sitter-indent)
-(use-package tree-sitter-langs)
 
-;;; lsp-mode
+(use-package tree-sitter-indent)
+
+(use-package tree-sitter-langs)
 
 (use-package lsp-mode
   :init
@@ -283,8 +253,6 @@
   (lsp-ui-doc-position 'at-point)
   (lsp-ui-sideline-enable nil)
   :commands lsp-ui-mode)
-
-;;; company-mode
 
 (use-package company
   :after lsp-mode
@@ -303,51 +271,31 @@
   :config
   (setq company-box-backends-colors '((company-capf :all "white" :selected (:background "grey" :foreground "white")))))
 
-;;; markdown-mode
-
 (use-package markdown-mode)
 
-;;; dockerfile-mode
-
 (use-package dockerfile-mode)
-
-;;; docker
 
 (use-package docker
   :bind ("C-c d" . docker))
 
-;;; terraform-mode
-
 (use-package terraform-mode)
 
-;;; yaml-mode
-
 (use-package yaml-mode)
-
-;;; rust-mode
 
 (use-package rust-mode
   :config
   (add-hook 'rust-mode-hook (lambda () (setq indent-tabs-mode nil))))
-
-;;; haskell-mode
 
 (use-package haskell-mode
   :bind
   (:map haskell-mode-map
 	("C-c C-c" . haskell-compile)))
 
-;;; groovy-mode
-
 (use-package groovy-mode)
-
-;;; whole-line-or-region
 
 (use-package whole-line-or-region
   :init
   (whole-line-or-region-global-mode t))
-
-;;; vertico
 
 (use-package vertico
   :init
@@ -366,23 +314,17 @@
   :hook
   (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
-;;; marginalia
-
 (use-package marginalia
   :bind
   (:map minibuffer-local-map ("M-A" . marginalia-cycle))
   :init
   (marginalia-mode))
 
-;;; orderless
-
 (use-package orderless
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
-
-;;; consult
 
 (use-package consult
   :bind
@@ -392,8 +334,6 @@
   ("C-x t b" . consult-buffer-other-tab)
   ("M-y" . consult-yank-pop))
 
-;;; auto-package-update
-
 (use-package auto-package-update
   :demand
   :config
@@ -401,8 +341,6 @@
   (auto-package-update-maybe)
   (setq auto-package-update-interval 1)
   (auto-package-update-at-time "05:00"))
-
-;;; openwith
 
 (use-package openwith
   :config
@@ -418,16 +356,17 @@
                '("--fullscreen" "--start-at" file))))
   (openwith-mode 1))
 
-;;; all-the-icons
-
 (use-package all-the-icons)
+
 (use-package all-the-icons-dired
   :config
   (setq all-the-icons-dired-monochrome nil)
   :hook
   (dired-mode))
+
 (use-package all-the-icons-ibuffer
   :init (all-the-icons-ibuffer-mode 1))
+
 (use-package all-the-icons-completion
   :init
   (all-the-icons-completion-mode)
@@ -435,8 +374,6 @@
   (marginalia-mode . all-the-icons-completion-marginalia-setup))
 
 (setq inhibit-compacting-font-caches t)
-
-;;; org
 
 (use-package org
   :bind
@@ -462,22 +399,14 @@
    '((emacs-lisp . t) (shell . t)))
   (setq org-file-apps-gnu (append '((t . "setsid -w xdg-open %s")) org-file-apps-gnu)))
 
-;;; org-habit-stats
-
 (use-package org-habit-stats
   :defer t
   :hook (org-agenda-mode . (lambda () (local-set-key (kbd "h") 'org-habit-stats-view-habit-at-point-agenda))))
 
-;;; valign
-
 (use-package valign
   :hook (org-mode))
 
-;;; hydra
-
 (use-package hydra)
-
-;;; org-superstar
 
 (use-package org-superstar
   :after org
@@ -507,21 +436,15 @@
   ((org-present-mode . ji/org-present-mode-hook)
    (org-present-mode-quit . ji/org-present-mode-quit-hook)))
 
-;;; multiple-cursors
-
 (use-package multiple-cursors
   :bind
   ("C-c C-SPC" . mc/edit-lines))
-
-;;; helpful
 
 (use-package helpful
   :bind
   ("C-h f" . helpful-callable)
   ("C-h v" . helpful-variable)
   ("C-h k" . helpful-key))
-
-;;; which-key
 
 (use-package which-key
   :config
@@ -655,7 +578,6 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 	      ("=" . 'ji/ediff-marked-pair)
 	      ("?" . 'hydra-dired/body)))
 
-;; Use dired-narrow
 (use-package dired-narrow
   :after dired
   :bind (:map dired-mode-map ("C-n" . dired-narrow)))
