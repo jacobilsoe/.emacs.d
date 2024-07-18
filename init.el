@@ -450,110 +450,6 @@
   :config
   (which-key-mode))
 
-;;; dired
-
-;; Ensure jumping to beginning and end of buffer stays within file list
-(defun ji/dired-jump-to-first-entry ()
-  (interactive)
-  (beginning-of-buffer)
-  (dired-goto-next-nontrivial-file))
-(defun ji/dired-jump-to-last-entry ()
-  (interactive)
-  (end-of-buffer)
-  (dired-next-line -1))
-
-;; Add possibility to force open a file in an external application
-(defun ji/dired-open-file-in-external-app ()
-  (interactive)
-  (cond ((eq system-type 'gnu/linux)
-	 (let* ((file (dired-get-filename nil t))) (call-process "xdg-open" nil 0 nil file)))
-	((eq system-type 'windows-nt)
-	 (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" (dired-get-filename) t t)))))
-
-(defun ji/dired-get-size ()
-  (interactive)
-  (let ((files (dired-get-marked-files)))
-    (with-temp-buffer
-      (apply 'call-process "du" nil t nil "-ach" files)
-      (message "Number of files and directories: %s Total size: %s"
-	       (- (count-lines (point-min) (point-max)) 1)
-               (progn
-                 (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
-                 (match-string 1))))))
-
-(defun ji/ediff-marked-pair ()
-  (interactive)
-  (let* ((marked-files (dired-get-marked-files nil nil))
-         (other-win (get-window-with-predicate
-                     (lambda (window)
-                       (with-current-buffer (window-buffer window)
-                         (and (not (eq window (selected-window)))
-                              (eq major-mode 'dired-mode))))))
-         (other-marked-files (and other-win
-                                  (with-current-buffer (window-buffer other-win)
-                                    (dired-get-marked-files nil)))))
-    (cond ((= (length marked-files) 2)
-           (ediff-files (nth 0 marked-files) (nth 1 marked-files)))
-          ((and (= (length marked-files) 1) (= (length other-marked-files) 1))
-           (ediff-files (nth 0 marked-files) (nth 0 other-marked-files)))
-          (t (error "Please mark exactly 2 files, at least one locally")))))
-
-(defun ji/dired-duplicate-this-file ()
-  (interactive)
-  (let* ((this  (dired-get-filename t))
-         (ctr   1)
-         (new   (format "%s[%d].%s" (file-name-sans-extension this) ctr (file-name-extension this))))
-    (while (file-exists-p new)
-      (setq ctr  (1+ ctr)
-            new  (format "%s[%d].%s" (file-name-sans-extension this) ctr (file-name-extension this))))
-    (dired-copy-file this new nil)))
-
-(defhydra hydra-dired (:color pink :hint nil)
-"
-^Mark^                  ^Operate^                       ^View^                                ^Search^
-^^^^^^^^---------------------------------------------------------------------------------------------------------------
-_m_   : mark            _C_       : copy                _g_       : refresh                   _M-s M-d_ : find files
-_% m_ : mark regexp     _% C_     : copy regexp         _C-0 s_   : refresh using switches    _A_       : find in files
-_% g_ : mark containing _R_       : rename/move         _C-n_     : narrow
-_u_   : unmark          _% R_     : rename/move regexp  _s_       : toggle sorting
-_U_   : unmark all      _D_       : delete              _v_       : view file
-_t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total size and count
-^ ^                     _c_       : compress to         _o_       : open in other window
-^ ^                     _=_       : ediff marked pair   _w_       : copy file name
-^ ^                     _C-x C-q_ : toggle read-only    _C-0 w_   : copy absolute file name
-^ ^                     _M-s M-c_ : duplicate file      _(_       : toggle details
-"
-("m" dired-mark)
-("% m" dired-mark-files-regexp)
-("% g" dired-mark-files-containing-regexp)
-("u" dired-unmark)
-("U" dired-unmark-all-marks)
-("t" dired-toggle-marks)
-("C" dired-do-copy)
-("% C" dired-do-copy-regexp)
-("R" dired-do-rename)
-("% R" dired-do-rename-regexp)
-("D" dired-do-delete)
-("Z" dired-do-compress)
-("c" dired-do-compress-to)
-("g" revert-buffer)
-("C-0 s" (lambda () (interactive) (let ((current-prefix-arg 0)) (call-interactively #'dired-sort-toggle-or-edit))))
-("C-n" dired-narrow)
-("s" dired-sort-toggle-or-edit)
-("v" dired-view-file)
-("M-s M-s" dired-get-size)
-("o" dired-find-file-other-window)
-("=" ji/ediff-marked-pair)
-("C-x C-q" dired-toggle-read-only)
-("w" dired-copy-filename-as-kill)
-("C-0 w" (lambda () (interactive) (let ((current-prefix-arg 0)) (call-interactively #'dired-copy-filename-as-kill))))
-("(" dired-hide-details-mode)
-("M-s M-d" find-name-dired)
-("M-s M-c" ji/dired-duplicate-this-file)
-("A" dired-do-find-regexp)
-("q" quit-window "quit" :color blue)
-("?" nil :color blue))
-
 (use-package dired
   :ensure nil
   :hook
@@ -568,6 +464,107 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
   (setq dired-dwim-target t)
   (setq dired-recursive-deletes 'always)
   (setq dired-recursive-copies 'always)
+  ;; Ensure jumping to beginning and end of buffer stays within file list
+  (defun ji/dired-jump-to-first-entry ()
+    (interactive)
+    (beginning-of-buffer)
+    (dired-goto-next-nontrivial-file))
+  (defun ji/dired-jump-to-last-entry ()
+    (interactive)
+    (end-of-buffer)
+    (dired-next-line -1))
+
+  ;; Add possibility to force open a file in an external application
+  (defun ji/dired-open-file-in-external-app ()
+    (interactive)
+    (cond ((eq system-type 'gnu/linux)
+	   (let* ((file (dired-get-filename nil t))) (call-process "xdg-open" nil 0 nil file)))
+	  ((eq system-type 'windows-nt)
+	   (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" (dired-get-filename) t t)))))
+
+  (defun ji/dired-get-size ()
+    (interactive)
+    (let ((files (dired-get-marked-files)))
+      (with-temp-buffer
+	(apply 'call-process "du" nil t nil "-ach" files)
+	(message "Number of files and directories: %s Total size: %s"
+		 (- (count-lines (point-min) (point-max)) 1)
+		 (progn
+                   (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
+                   (match-string 1))))))
+
+  (defun ji/ediff-marked-pair ()
+    (interactive)
+    (let* ((marked-files (dired-get-marked-files nil nil))
+           (other-win (get-window-with-predicate
+                       (lambda (window)
+			 (with-current-buffer (window-buffer window)
+                           (and (not (eq window (selected-window)))
+				(eq major-mode 'dired-mode))))))
+           (other-marked-files (and other-win
+                                    (with-current-buffer (window-buffer other-win)
+                                      (dired-get-marked-files nil)))))
+      (cond ((= (length marked-files) 2)
+             (ediff-files (nth 0 marked-files) (nth 1 marked-files)))
+            ((and (= (length marked-files) 1) (= (length other-marked-files) 1))
+             (ediff-files (nth 0 marked-files) (nth 0 other-marked-files)))
+            (t (error "Please mark exactly 2 files, at least one locally")))))
+
+  (defun ji/dired-duplicate-this-file ()
+    (interactive)
+    (let* ((this  (dired-get-filename t))
+           (ctr   1)
+           (new   (format "%s[%d].%s" (file-name-sans-extension this) ctr (file-name-extension this))))
+      (while (file-exists-p new)
+	(setq ctr  (1+ ctr)
+              new  (format "%s[%d].%s" (file-name-sans-extension this) ctr (file-name-extension this))))
+      (dired-copy-file this new nil)))
+
+  (defhydra hydra-dired (:color pink :hint nil)
+    "
+^Mark^                  ^Operate^                       ^View^                                ^Search^
+^^^^^^^^---------------------------------------------------------------------------------------------------------------
+_m_   : mark            _C_       : copy                _g_       : refresh                   _M-s M-d_ : find files
+_% m_ : mark regexp     _% C_     : copy regexp         _C-0 s_   : refresh using switches    _A_       : find in files
+_% g_ : mark containing _R_       : rename/move         _C-n_     : narrow
+_u_   : unmark          _% R_     : rename/move regexp  _s_       : toggle sorting
+_U_   : unmark all      _D_       : delete              _v_       : view file
+_t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total size and count
+^ ^                     _c_       : compress to         _o_       : open in other window
+^ ^                     _=_       : ediff marked pair   _w_       : copy file name
+^ ^                     _C-x C-q_ : toggle read-only    _C-0 w_   : copy absolute file name
+^ ^                     _M-s M-c_ : duplicate file      _(_       : toggle details
+"
+    ("m" dired-mark)
+    ("% m" dired-mark-files-regexp)
+    ("% g" dired-mark-files-containing-regexp)
+    ("u" dired-unmark)
+    ("U" dired-unmark-all-marks)
+    ("t" dired-toggle-marks)
+    ("C" dired-do-copy)
+    ("% C" dired-do-copy-regexp)
+    ("R" dired-do-rename)
+    ("% R" dired-do-rename-regexp)
+    ("D" dired-do-delete)
+    ("Z" dired-do-compress)
+    ("c" dired-do-compress-to)
+    ("g" revert-buffer)
+    ("C-0 s" (lambda () (interactive) (let ((current-prefix-arg 0)) (call-interactively #'dired-sort-toggle-or-edit))))
+    ("C-n" dired-narrow)
+    ("s" dired-sort-toggle-or-edit)
+    ("v" dired-view-file)
+    ("M-s M-s" dired-get-size)
+    ("o" dired-find-file-other-window)
+    ("=" ji/ediff-marked-pair)
+    ("C-x C-q" dired-toggle-read-only)
+    ("w" dired-copy-filename-as-kill)
+    ("C-0 w" (lambda () (interactive) (let ((current-prefix-arg 0)) (call-interactively #'dired-copy-filename-as-kill))))
+    ("(" dired-hide-details-mode)
+    ("M-s M-d" find-name-dired)
+    ("M-s M-c" ji/dired-duplicate-this-file)
+    ("A" dired-do-find-regexp)
+    ("q" quit-window "quit" :color blue)
+    ("?" nil :color blue))
   :bind (:map dired-mode-map
 	      ([remap beginning-of-buffer] . 'ji/dired-jump-to-first-entry)
 	      ([remap end-of-buffer] . 'ji/dired-jump-to-last-entry)
