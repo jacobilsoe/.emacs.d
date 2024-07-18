@@ -82,12 +82,13 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
-(require 'use-package-ensure)
-
 (setq use-package-always-ensure t
       use-package-verbose t
       use-package-compute-statistics t
-      use-package-minimum-reported-time 0.0001)
+      use-package-minimum-reported-time 0.0001
+      use-package-enable-imenu-support t)
+
+(require 'use-package-ensure)
 
 ;;; mode-line
 
