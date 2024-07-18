@@ -204,9 +204,9 @@
   :mode "\\.puml\\'"
   :bind (:map plantuml-mode-map ("C-c C-c" . (lambda () (interactive) (plantuml-preview 4)))))
 
-;;; calc
-
-(setq calc-algebraic-mode t)
+(use-package calc
+  :init
+  (setq calc-algebraic-mode t))
 
 (use-package rg
   :config
