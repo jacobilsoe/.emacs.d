@@ -472,8 +472,8 @@
 ;;; org-habit-stats
 
 (use-package org-habit-stats
-  :config
-  (add-hook 'org-agenda-mode-hook (lambda () (local-set-key (kbd "h") 'org-habit-stats-view-habit-at-point-agenda))))
+  :defer t
+  :hook (org-agenda-mode . (lambda () (local-set-key (kbd "h") 'org-habit-stats-view-habit-at-point-agenda))))
 
 ;;; valign
 
