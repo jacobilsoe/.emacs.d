@@ -1,9 +1,5 @@
 ;;; -*- lexical-binding:t -*-
 
-;;; general
-
-(server-start)
-
 ;;; visuals
 
 (let ((height (if (eq system-type 'windows-nt) 115 173)))
