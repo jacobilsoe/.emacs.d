@@ -166,36 +166,27 @@
   (setq magit-push-always-verify nil)
   (setq magit-diff-refine-hunk 'all))
 
-;;; ediff
-
-;; restore previous window configuration when quitting ediff
-
-(defvar ji/ediff-previous-window-configuration)
-
-(defun ji/ediff-restore-window-configuration ()
-  (set-window-configuration ji/ediff-previous-window-configuration)
-  (remove-hook 'ediff-after-quit-hook-internal 'ji/ediff-restore-window-configuration))
-
-(defun ji/ediff-restore-window-configuration-advice (orig-fun &rest args)
-  (setq ji/ediff-previous-window-configuration (current-window-configuration))
-  (add-hook 'ediff-after-quit-hook-internal 'ji/ediff-restore-window-configuration)
-  (apply orig-fun args))
-
-(dolist (command '(ediff ediff-files ediff-buffers))
-  (advice-add command :around #'ji/ediff-restore-window-configuration-advice))
-
-;; quit ediff without asking for confirmation
-
-(defun ji/ediff-quit-unconditionally ()
-  (interactive)
-  (always-yes #'ediff-quit))
-
-(defun ji/add-q-to-ediff-mode-map ()
-  (define-key ediff-mode-map "q" 'ji/ediff-quit-unconditionally))
-
 (use-package ediff
   :init
-  (add-hook 'ediff-keymap-setup-hook 'ji/add-q-to-ediff-mode-map)
+  ;; restore previous window configuration when quitting ediff
+  (defvar ji/ediff-previous-window-configuration)
+  (defun ji/ediff-restore-window-configuration ()
+    (set-window-configuration ji/ediff-previous-window-configuration)
+    (remove-hook 'ediff-after-quit-hook-internal 'ji/ediff-restore-window-configuration))
+  (defun ji/ediff-restore-window-configuration-advice (orig-fun &rest args)
+    (setq ji/ediff-previous-window-configuration (current-window-configuration))
+    (add-hook 'ediff-after-quit-hook-internal 'ji/ediff-restore-window-configuration)
+    (apply orig-fun args))
+    (dolist (command '(ediff ediff-files ediff-buffers))
+    (advice-add command :around #'ji/ediff-restore-window-configuration-advice))
+
+  (defun ji/ediff-quit-unconditionally ()
+    (interactive)
+    (always-yes #'ediff-quit))
+  (defun ji/add-q-to-ediff-mode-map ()
+    (define-key ediff-mode-map "q" 'ji/ediff-quit-unconditionally))
+  :hook
+  (ediff-keymap-setup . ji/add-q-to-ediff-mode-map)
   :bind
   ("M-<down>" . ediff-next-difference)
   ("M-<up>" . ediff-previous-difference)
