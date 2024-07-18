@@ -38,14 +38,9 @@
   ;; performance
   (setq inhibit-compacting-font-caches t)
 
-  ;; fullscreen
-  (toggle-frame-maximized)
   (setq w32-grab-focus-on-raise nil)
 
   ;; editing
-  (setq show-paren-delay 0)
-  (show-paren-mode)
-  (blink-cursor-mode 0)
   (delete-selection-mode)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (global-set-key (kbd "C-x k") 'kill-this-buffer)
@@ -107,6 +102,18 @@
     ("q" nil :color blue))
 
   (global-set-key (kbd "C-c h") 'hydra-help/body))
+
+(use-package paren
+  :ensure nil
+  :init
+  (setq show-paren-delay 0)
+  (show-paren-mode))
+
+(use-package frame
+  :ensure nil
+  :init
+  (toggle-frame-maximized)
+  (blink-cursor-mode 0))
 
 (use-package time
   :ensure nil
