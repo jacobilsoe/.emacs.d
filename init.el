@@ -26,7 +26,6 @@
     (set-face-attribute 'default nil :height height :family "InputMono"))
   (load-theme 'modus-vivendi t)
   (tool-bar-mode 0)
-
   (column-number-mode)
 
   ;; pulse current line
@@ -43,7 +42,6 @@
   ;; editing
   (delete-selection-mode)
   (fset 'yes-or-no-p 'y-or-n-p)
-  (winner-mode 1)
   (setq completion-ignore-case t)
   (defun always-yes (&rest args)
     (cl-letf (((symbol-function 'y-or-n-p) #'always))
@@ -98,6 +96,11 @@
   ("C-x C-b" . ibuffer)
   ("M-SPC" . cycle-spacing)
   ("C-c h" . hydra-help/body))
+
+(use-package winner
+  :ensure nil
+  :init
+  (winner-mode 1))
 
 (use-package files
   :ensure nil
