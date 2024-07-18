@@ -412,26 +412,23 @@
   :after org
   :hook (org-mode))
 
-;;; org-present
-
-(defun ji/org-present-mode-hook ()
-  (face-remap-set-base 'default '(:height 1.5) 'variable-pitch 'default)
-  (face-remap-set-base 'org-document-title '(:height 3.0) 'org-document-title)
-  (face-remap-set-base 'org-level-1 '(:height 2.0) 'org-level-1)
-  (org-present-hide-cursor)
-  (org-present-read-only)
-  (org-display-inline-images))
-
-(defun ji/org-present-mode-quit-hook ()
-  (face-remap-reset-base 'default)
-  (face-remap-reset-base 'org-document-title)
-  (face-remap-reset-base 'org-level-1)
-  (org-present-show-cursor)
-  (org-present-read-write)
-  (org-remove-inline-images))
-
 (use-package org-present
   :after org
+  :init
+  (defun ji/org-present-mode-hook ()
+    (face-remap-set-base 'default '(:height 1.5) 'variable-pitch 'default)
+    (face-remap-set-base 'org-document-title '(:height 3.0) 'org-document-title)
+    (face-remap-set-base 'org-level-1 '(:height 2.0) 'org-level-1)
+    (org-present-hide-cursor)
+    (org-present-read-only)
+    (org-display-inline-images))
+  (defun ji/org-present-mode-quit-hook ()
+    (face-remap-reset-base 'default)
+    (face-remap-reset-base 'org-document-title)
+    (face-remap-reset-base 'org-level-1)
+    (org-present-show-cursor)
+    (org-present-read-write)
+    (org-remove-inline-images))
   :hook
   ((org-present-mode . ji/org-present-mode-hook)
    (org-present-mode-quit . ji/org-present-mode-quit-hook)))
