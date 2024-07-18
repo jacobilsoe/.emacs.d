@@ -1,69 +1,5 @@
 ;;; -*- lexical-binding:t -*-
 
-;;; visuals
-
-(let ((height (if (eq system-type 'windows-nt) 115 173)))
-  (set-face-attribute 'default nil :height height :family "InputMono"))
-
-(load-theme 'modus-vivendi t)
-(tool-bar-mode 0)
-(setq inhibit-splash-screen t)
-
-;; Pulse current line
-(defun ji/pulse-line (&rest _)
-      (pulse-momentary-highlight-one-line (point)))
-(dolist (command '(recenter-top-bottom other-window ace-window))
-  (advice-add command :after #'ji/pulse-line))
-
-;;; fullscreen
-
-(toggle-frame-maximized)
-(setq w32-grab-focus-on-raise nil)
-
-;;; editing
-
-(setq show-paren-delay 0)
-(show-paren-mode)
-(blink-cursor-mode 0)
-(delete-selection-mode)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "M-SPC") 'cycle-spacing)
-(fset 'yes-or-no-p 'y-or-n-p)
-(setq confirm-kill-emacs 'yes-or-no-p)
-(winner-mode 1)
-(setq completion-ignore-case t)
-(defun always-yes (&rest args)
-  (cl-letf (((symbol-function 'y-or-n-p) #'always))
-    (funcall-interactively (car args) (cdr args))))
-;; use standard C locale for formatting time values
-(setq system-time-locale "C")
-(setq bookmark-default-file "~/Dropbox/Documents/bookmarks")
-
-(defun generate-uuid-guid ()
-  (interactive)
-  (let ((command
-	 (cond
-	  ((eq system-type 'windows-nt) "powershell.exe -Command [guid]::NewGuid().toString()")
-	  ((eq system-type 'gnu/linux) "uuidgen"))))
-    (kill-new (string-trim (shell-command-to-string command)))
-    (message "UUID/GUID %s copied to kill ring" (car kill-ring))))
-
-;;; scratch buffer
-
-(setq initial-major-mode 'fundamental-mode
-      initial-scratch-message nil)
-
-;;; files
-
-(setq make-backup-files nil)
-(setq large-file-warning-threshold nil)
-(setq create-lockfiles nil)
-(prefer-coding-system 'utf-8)
-
-;;; package
-
 (require 'package)
 
 (if (file-directory-p "~/.emacs.d/mirror-elpa")
@@ -83,12 +19,99 @@
 
 (require 'use-package-ensure)
 
-;;; mode-line
+(use-package emacs
+  :init
+  ;; visuals
+  (let ((height (if (eq system-type 'windows-nt) 115 173)))
+    (set-face-attribute 'default nil :height height :family "InputMono"))
+  (load-theme 'modus-vivendi t)
+  (tool-bar-mode 0)
+  (setq inhibit-splash-screen t)
 
-(setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M:%S" now))))
-(setq display-time-interval 1)
-(display-time-mode)
-(column-number-mode)
+  ;; pulse current line
+  (defun ji/pulse-line (&rest _)
+    (pulse-momentary-highlight-one-line (point)))
+  (dolist (command '(recenter-top-bottom other-window ace-window))
+    (advice-add command :after #'ji/pulse-line))
+
+  ;; performance
+  (setq inhibit-compacting-font-caches t)
+
+  ;; fullscreen
+  (toggle-frame-maximized)
+  (setq w32-grab-focus-on-raise nil)
+
+  ;; editing
+  (setq show-paren-delay 0)
+  (show-paren-mode)
+  (blink-cursor-mode 0)
+  (delete-selection-mode)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (global-set-key (kbd "C-x k") 'kill-this-buffer)
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (global-set-key (kbd "M-SPC") 'cycle-spacing)
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (setq confirm-kill-emacs 'yes-or-no-p)
+  (winner-mode 1)
+  (setq completion-ignore-case t)
+  (defun always-yes (&rest args)
+    (cl-letf (((symbol-function 'y-or-n-p) #'always))
+      (funcall-interactively (car args) (cdr args))))
+  (add-hook 'prog-mode-hook #'hs-minor-mode)
+
+  ;; use standard C locale for formatting time values
+  (setq system-time-locale "C")
+  (setq bookmark-default-file "~/Dropbox/Documents/bookmarks")
+
+  (defun generate-uuid-guid ()
+    (interactive)
+    (let ((command
+	   (cond
+	    ((eq system-type 'windows-nt) "powershell.exe -Command [guid]::NewGuid().toString()")
+	    ((eq system-type 'gnu/linux) "uuidgen"))))
+      (kill-new (string-trim (shell-command-to-string command)))
+      (message "UUID/GUID %s copied to kill ring" (car kill-ring))))
+
+  ;; scratch buffer
+  (setq initial-major-mode 'fundamental-mode
+	initial-scratch-message nil)
+
+  ;; files
+  (setq make-backup-files nil)
+  (setq large-file-warning-threshold nil)
+  (setq create-lockfiles nil)
+  (prefer-coding-system 'utf-8)
+
+  ;; mode-line
+  (setq display-time-string-forms '((propertize (format-time-string "%d/%m/%Y %H:%M:%S" now))))
+  (setq display-time-interval 1)
+  (display-time-mode)
+  (column-number-mode)
+
+  ;; notifications
+
+  (defun ji/windows-alert (message)
+    (let ((id (w32-notification-notify :title "Info" :body message :level 'info)))
+      (run-with-timer 1 nil (lambda nil (w32-notification-close id)))))
+
+  (defun ji/schedule-break ()
+    (interactive)
+    (run-at-time "20 min" nil 'ji/windows-alert "Take a break"))
+
+  ;; hydra to show help for seldomly used commands
+  (defhydra hydra-help (:color pink :hint nil)
+    "
+^Mark^                  ^Operate^                                      ^View^                      ^Search^
+^^^^^^^^----------------------------------------------------------------------------------------------------------
+^ ^                     _C-x TAB_   : indent-rigidly                   ^ ^                         _M-s o_ : occur
+^ ^                     _C-x RET c_ : universal-coding-system-argument
+"
+    ("C-x TAB" indent-rigedly)
+    ("C-x RET c" universal-coding-system-argument)
+    ("M-s o" occur)
+    ("q" nil :color blue))
+
+  (global-set-key (kbd "C-c h") 'hydra-help/body))
 
 (use-package minions
   :hook (doom-modeline-mode))
@@ -97,16 +120,6 @@
   :init (doom-modeline-mode 1)
   :custom
   (doom-modeline-minor-modes t))
-
-;;; notifications
-
-(defun ji/windows-alert (message)
-  (let ((id (w32-notification-notify :title "Info" :body message :level 'info)))
-    (run-with-timer 1 nil (lambda nil (w32-notification-close id)))))
-
-(defun ji/schedule-break ()
-  (interactive)
-  (run-at-time "20 min" nil 'ji/windows-alert "Take a break"))
 
 (use-package proced
   :custom
@@ -371,8 +384,6 @@
   :hook
   (marginalia-mode . all-the-icons-completion-marginalia-setup))
 
-(setq inhibit-compacting-font-caches t)
-
 (use-package org
   :bind
   ("C-c a" . org-agenda)
@@ -576,19 +587,3 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 (use-package dired-narrow
   :after dired
   :bind (:map dired-mode-map ("C-n" . dired-narrow)))
-
-;;; hydra to show help for seldomly used commands
-
-(defhydra hydra-help (:color pink :hint nil)
-"
-^Mark^                  ^Operate^                                      ^View^                      ^Search^
-^^^^^^^^----------------------------------------------------------------------------------------------------------
-^ ^                     _C-x TAB_   : indent-rigidly                   ^ ^                         _M-s o_ : occur
-^ ^                     _C-x RET c_ : universal-coding-system-argument
-"
-("C-x TAB" indent-rigedly)
-("C-x RET c" universal-coding-system-argument)
-("M-s o" occur)
-("q" nil :color blue))
-
-(global-set-key (kbd "C-c h") 'hydra-help/body)
