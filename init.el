@@ -390,24 +390,25 @@
   ("C-c a" . org-agenda)
   ("C-c c" . org-capture)
   :config
-  (setq org-agenda-files '("~/Dropbox/Documents"))
-  (setq org-default-notes-file "~/Dropbox/Documents/tasks.org")
-  (setq org-tags-column 0)
-  (setq org-src-window-setup 'current-window)
-  (setq org-confirm-shell-link-function nil)
-  (setq org-habit-graph-column 50)
-  (setq org-habit-show-all-today t)
-  (setq org-log-into-drawer t)
-  (setq org-hide-leading-stars t)
-  (setq org-startup-folded t)
-  (setq org-image-actual-width nil)
+  (setq org-agenda-files '("~/Dropbox/Documents")
+	org-default-notes-file "~/Dropbox/Documents/tasks.org"
+	org-tags-column 0
+	org-src-window-setup 'current-window
+	org-confirm-shell-link-function nil
+	org-habit-graph-column 50
+	org-habit-show-all-today t
+	org-habit-preceding-days 28
+	org-log-into-drawer t
+	org-hide-leading-stars t
+	org-startup-folded t
+	org-image-actual-width nil
+	org-file-apps-gnu (append '((t . "setsid -w xdg-open %s")) org-file-apps-gnu)
+	org-capture-templates '(("t" "Task" entry (file org-default-notes-file) "* TODO %?\n  :PROPERTIES:\n  :CAPTURED: %U\n  :END:")))
   (add-to-list 'org-modules 'org-habit)
-  (setq org-capture-templates '(("t" "Task" entry (file org-default-notes-file) "* TODO %?\n  :PROPERTIES:\n  :CAPTURED: %U\n  :END:")))
   (plist-put org-calc-default-modes 'calc-float-format '(float 12))
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((emacs-lisp . t) (shell . t)))
-  (setq org-file-apps-gnu (append '((t . "setsid -w xdg-open %s")) org-file-apps-gnu)))
+   '((emacs-lisp . t) (shell . t))))
 
 (use-package org-habit-stats
   :defer t
