@@ -221,9 +221,8 @@
   (setq calc-algebraic-mode t))
 
 (use-package rg
-  :config
-  (rg-enable-default-bindings)
-  (rg-enable-menu))
+  :bind
+  ("C-c s" . rg-menu))
 
 (use-package avy
   :bind
