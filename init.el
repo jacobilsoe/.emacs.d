@@ -132,6 +132,7 @@
   (doom-modeline-minor-modes t))
 
 (use-package proced
+  :defer t
   :custom
   ((proced-tree-flag t)
    (proced-auto-update-flag t)
