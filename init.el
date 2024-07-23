@@ -376,22 +376,21 @@
                '("--fullscreen" "--start-at" file))))
   (openwith-mode 1))
 
-(use-package all-the-icons)
+(use-package nerd-icons)
 
-(use-package all-the-icons-dired
-  :config
-  (setq all-the-icons-dired-monochrome nil)
+(use-package nerd-icons-dired
   :hook
   (dired-mode))
 
-(use-package all-the-icons-ibuffer
-  :init (all-the-icons-ibuffer-mode 1))
-
-(use-package all-the-icons-completion
-  :init
-  (all-the-icons-completion-mode)
+(use-package nerd-icons-ibuffer
   :hook
-  (marginalia-mode . all-the-icons-completion-marginalia-setup))
+  (ibuffer-mode))
+
+(use-package nerd-icons-completion
+  :after marginalia
+  :config
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
 (use-package org
   :bind
