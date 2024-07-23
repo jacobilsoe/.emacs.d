@@ -284,7 +284,8 @@
   :config
   (setq company-box-backends-colors '((company-capf :all "white" :selected (:background "grey" :foreground "white")))))
 
-(use-package markdown-mode)
+(use-package markdown-mode
+  :defer t)
 
 (use-package dockerfile-mode)
 
