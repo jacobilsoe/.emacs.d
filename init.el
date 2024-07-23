@@ -243,10 +243,10 @@
   :interpreter
   ("scala" . scala-mode))
 
-(use-package json-mode
+(use-package js
+  :defer t
   :config
-  (setq js-indent-level 2)
-  (setq json-reformat:indent-width 2))
+  (setq js-indent-level 2))
 
 (use-package tree-sitter)
 
