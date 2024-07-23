@@ -289,7 +289,8 @@
 (use-package markdown-mode
   :defer t)
 
-(use-package dockerfile-mode)
+(use-package dockerfile-mode
+  :defer t)
 
 (use-package docker
   :bind ("C-c d" . docker))
