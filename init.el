@@ -295,11 +295,14 @@
 (use-package docker
   :bind ("C-c d" . docker))
 
-(use-package terraform-mode)
+(use-package terraform-mode
+  :defer t)
 
-(use-package yaml-mode)
+(use-package yaml-mode
+  :defer t)
 
 (use-package rust-mode
+  :defer t
   :config
   (add-hook 'rust-mode-hook (lambda () (setq indent-tabs-mode nil))))
 
@@ -308,7 +311,8 @@
   (:map haskell-mode-map
 	("C-c C-c" . haskell-compile)))
 
-(use-package groovy-mode)
+(use-package groovy-mode
+  :defer t)
 
 (use-package whole-line-or-region
   :init
