@@ -208,6 +208,7 @@
   (ediff-current-diff-C ((t (:extend t :background "#888833" :foreground "white")))))
 
 (use-package logview
+  :defer t
   :config
   (setq logview-additional-submodes '(("SLF4J-1" (format . "TIMESTAMP LEVEL [NAME] (THREAD)") (levels . "SLF4J"))("LOG4NET-1" (format . "TIMESTAMP [THREAD] LEVEL NAME (IGNORED)") (levels . "SLF4J")))))
 
