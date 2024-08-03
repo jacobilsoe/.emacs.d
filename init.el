@@ -37,6 +37,8 @@
       (funcall-interactively (car args) (cdr args))))
   (add-hook 'prog-mode-hook #'hs-minor-mode)
 
+  (setq x-select-enable-clipboard-manager nil)
+
   (setq system-time-locale "C")
   (setq bookmark-default-file "~/Dropbox/Documents/bookmarks")
 
