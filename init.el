@@ -63,7 +63,9 @@
 
   (defun ji/schedule-break ()
     (interactive)
-    (run-at-time "20 min" nil 'ji/windows-alert "Take a break"))
+    (let ((timeout "20 min"))
+      (message "Scheduling break in %s" timeout)
+      (run-at-time timeout nil 'ji/windows-alert "Take a break")))
 
   (defun ji/generate-uuid-guid ()
     (interactive)
