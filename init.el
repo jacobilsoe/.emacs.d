@@ -89,7 +89,7 @@
     ("M-s o" occur)
     ("q" nil :color blue))
   :bind
-  ("C-x k" . kill-this-buffer)
+  ("C-x k" . kill-current-buffer)
   ("C-x C-b" . ibuffer)
   ("M-SPC" . cycle-spacing)
   ("C-c h" . hydra-help/body))
