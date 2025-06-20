@@ -176,7 +176,7 @@
   :config
   (advice-add 'magit-status :around #'ji/magit-status-advice)
   (setq magit-push-always-verify nil)
-  (setq magit-diff-refine-hunk 'all))
+  (setq magit-diff-refine-hunk t))
 
 (use-package ediff
   :init
