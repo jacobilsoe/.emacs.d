@@ -597,3 +597,8 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
 (use-package dired-narrow
   :after dired
   :bind (:map dired-mode-map ("C-n" . dired-narrow)))
+
+(use-package lilypond-mode
+  :load-path "elisp/lilypond"
+  :ensure nil
+  :mode "\\.\\(ly\\|ily\\)$")
