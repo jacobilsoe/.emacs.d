@@ -602,3 +602,5 @@ _t_   : toogle marks    _Z_       : compress/uncompress _M-s M-s_ : show total s
   :load-path "elisp/lilypond"
   :ensure nil
   :mode "\\.\\(ly\\|ily\\)$")
+
+(use-package csv-mode)
