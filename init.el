@@ -76,6 +76,25 @@
       (kill-new (string-trim (shell-command-to-string command)))
       (message "UUID/GUID %s copied to kill ring" (car kill-ring))))
 
+  (defun ji/view-eml ()
+    (interactive)
+    (require 'mm-decode)
+    (require 'mm-view)
+    (let* ((content (buffer-string))
+           (display-buffer (get-buffer-create "*EML*")))
+      (with-current-buffer display-buffer
+	(erase-buffer)
+	(insert content)
+	(goto-char (point-min))
+	(let ((inhibit-read-only t)
+              (handle (mm-dissect-buffer t)))
+          (erase-buffer)
+          (mm-display-parts handle)
+          (goto-char (point-min))))
+      (switch-to-buffer display-buffer)))
+
+  (add-to-list 'auto-mode-alist '("\\.eml\\'" . ji/view-eml))
+
   ;; hydra to show help for seldomly used commands
   (defhydra hydra-help (:color pink :hint nil)
     "
