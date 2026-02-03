@@ -371,7 +371,7 @@
   (setq openwith-associations
         (list
          (list (openwith-make-extension-regexp
-                '("mpg" "mpeg" "mp4" "avi" "wmv" "mov" "flv" "mkv" "m4v" "webm" "dav"))
+                '("mpg" "mpeg" "mp4" "avi" "wmv" "mov" "flv" "mkv" "m4v" "webm" "dav" "m2ts"))
                "mpv"
                '("--fullscreen" file))
          (list (openwith-make-extension-regexp
