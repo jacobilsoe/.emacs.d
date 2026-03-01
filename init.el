@@ -195,7 +195,8 @@
   :config
   (advice-add 'magit-status :around #'ji/magit-status-advice)
   (setq magit-push-always-verify nil)
-  (setq magit-diff-refine-hunk t))
+  (setq magit-diff-refine-hunk t)
+  (setq magit-diff-visit-prefer-worktree t))
 
 (use-package ediff
   :init
