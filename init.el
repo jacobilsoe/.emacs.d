@@ -523,14 +523,22 @@
 
   (defun ji/dired-get-size ()
     (interactive)
-    (let ((files (dired-get-marked-files)))
+    (let ((files (dired-get-marked-files))
+	  (dir-count 0) (file-count 0))
       (with-temp-buffer
 	(apply 'call-process "du" nil t nil "-ach" files)
-	(message "Number of files and directories: %s Total size: %s"
-		 (- (count-lines (point-min) (point-max)) 1)
-		 (progn
-                   (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
-                   (match-string 1))))))
+	(let ((total-size (progn
+			    (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
+			    (match-string 1))))
+	  (goto-char (point-min))
+	  (while (re-search-forward "\t\\(.+\\)$" nil t)
+	    (let ((path (match-string 1)))
+	      (unless (string-suffix-p "total" path)
+		(if (file-directory-p path)
+		    (cl-incf dir-count)
+		  (cl-incf file-count)))))
+	  (message "Directories: %s Files: %s Total size: %s"
+		   dir-count file-count total-size)))))
 
   (defun ji/ediff-marked-pair ()
     (interactive)
