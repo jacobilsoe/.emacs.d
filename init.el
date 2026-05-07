@@ -5,8 +5,8 @@
 (if (file-directory-p "~/.emacs.d/mirror-elpa")
     (setq package-archives '(("gnu"   . "~/.emacs.d/mirror-elpa/gnu/")
 			     ("melpa" . "~/.emacs.d/mirror-elpa/melpa/")))
-  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			   ("melpa" . "http://melpa.org/packages/"))))
+  (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			   ("melpa" . "https://melpa.org/packages/"))))
 
 (package-initialize)
 (package-refresh-contents t)
