@@ -312,6 +312,8 @@
   (setq company-box-backends-colors '((company-capf :all "white" :selected (:background "grey" :foreground "white")))))
 
 (use-package markdown-mode
+  :init
+  (setq markdown-hide-markup t)
   :defer t)
 
 (use-package dockerfile-mode
@@ -446,8 +448,9 @@
   :defer t
   :hook (org-agenda-mode . (lambda () (local-set-key (kbd "h") 'org-habit-stats-view-habit-at-point-agenda))))
 
+
 (use-package valign
-  :hook (org-mode))
+  :hook ((org-mode markdown-mode)))
 
 (use-package hydra)
 
