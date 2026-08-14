@@ -272,6 +272,11 @@
 
 (use-package js
   :defer t
+  :init
+  (defun ji/disable-indent-tabs ()
+    (setq indent-tabs-mode nil))
+  :hook
+  ((js-json-mode json-ts-mode) . ji/disable-indent-tabs)
   :config
   (setq js-indent-level 2))
 
