@@ -390,6 +390,11 @@
   ("C-x t b" . consult-buffer-other-tab)
   ("M-y" . consult-yank-pop))
 
+(use-package ghostel
+  :ensure t
+  :init
+  (setq ghostel-module-auto-install 'download))
+
 (use-package auto-package-update
   :demand
   :config
