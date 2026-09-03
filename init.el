@@ -50,6 +50,10 @@
   (setq create-lockfiles nil)
   (prefer-coding-system 'utf-8)
 
+  ;; fonts
+  (set-fontset-font t 'emoji (font-spec :family "Segoe UI Emoji") nil 'prepend)
+  (set-fontset-font t 'symbol (font-spec :family "Segoe UI Symbol") nil 'prepend)
+
   ;; pulse current line
   (defun ji/pulse-line (&rest _)
     (pulse-momentary-highlight-one-line (point)))
