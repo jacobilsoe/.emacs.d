@@ -201,7 +201,8 @@
   (setq magit-push-always-verify nil)
   (setq magit-diff-refine-hunk t)
   (setq magit-diff-visit-prefer-worktree t)
-  (setq magit-ediff-dwim-show-on-hunks 'magit-ediff-show-working-tree))
+  (setq magit-ediff-dwim-show-on-hunks 'magit-ediff-show-working-tree)
+  (add-hook 'magit-status-sections-hook #'magit-insert-worktrees t))
 
 (use-package ediff
   :init
