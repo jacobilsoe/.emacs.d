@@ -139,6 +139,7 @@
 (use-package frame
   :ensure nil
   :init
+  (setq frame-inherited-parameters '(width height fullscreen))
   (toggle-frame-maximized)
   (blink-cursor-mode 0))
 
